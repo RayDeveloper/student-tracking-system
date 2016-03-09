@@ -1,0 +1,6 @@
+select {
+    display:none;
+}
+form select.active {
+    display:block;
+}
