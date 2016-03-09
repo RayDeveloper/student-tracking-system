@@ -50,7 +50,7 @@ $db = new DatabaseAdapter("uwi_courses");
 <form action="DisplayCourses.php" align="center" method="post">
 
 <select >
-  <option value="default">Select a Year</option>
+  <option value="level">Select a Year</option>
   <option value="level">Year 1</option>
   <option value="level">Year 2</option>
   <option value="level">Year 3</option>
@@ -62,8 +62,9 @@ $db = new DatabaseAdapter("uwi_courses");
             <!-- <select id="sc"> -->
             <?php
 
-              //$_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
-              //echo  $_POST['level'];
+
+              $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
+              echo  $_CourseLevel;
 
         //     if(isset($_POST['submit'])){
         //      $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';

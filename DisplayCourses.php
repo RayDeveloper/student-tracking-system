@@ -14,7 +14,7 @@ $db = new DatabaseAdapter("uwi_courses");
 
 
 $level = isset($_POST['level']) ? $_POST['level'] : '';
-echo $_POST['level'];
+//echo $_POST['level'];
 
  $sql="SELECT * FROM Courses WHERE Course_Level like '".$level."' ";
 echo($sql);
