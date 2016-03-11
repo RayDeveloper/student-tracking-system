@@ -1,6 +1,3 @@
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta content="utf-8" http-equiv="encoding">
-
 <?php 
 
 require_once("lib/database.php");
@@ -43,29 +40,27 @@ $db = new DatabaseAdapter("uwi_courses");
    <li><a href='#'><span>Add A Student</span></a></li>
     <li><a href='addCourse.php'><span>Add Course</span></a></li>
     <li ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
-    <li class='active' ><a href='Customquery.php'><span>Delete Course</span></a></li>
+    <li class='active' ><a href='Customquery.php'><span>Custom Query</span></a></li>
 
    <li><a href='logout.php'><span>Logout</span></a></li>
  
 </ul>
 </div>
 <H1 align="center">Custom Query</H1>
+<?php
+if ( isset($_POST['course']) && is_array($_POST['course']) ) {
 
-<form action="DisplayCourses.php" align="center" method="POST">
+    foreach ( $_POST['course'] as $v => $value ) {
+    	echo "$value<br>";
+    	$nospace= str_replace("INFO","S",$value);
+    	//echo "<br>";
+    	$course = str_replace(' ', '', $nospace);
+    	//echo "<br>";
+    	echo $course;
+    	echo "<br>";
 
-<select name='Course_Level' onchange='this.form.submit()'>
-  <option selected>Select a Year</option>
-  <option value="level 1">Year 1</option>
-  <option value="level 2">Year 2</option>
-  <option value="level 3">Year 3</option>
-  <option value="Elective">Elective</option>
-  <option value="All years">All years</option>
-  <option value="Foundation Course">Foundation Course</option>
-</select>
-<noscript><input type="submit" value="Submit"></noscript>
-</form>
-</body>
-<!-- <script src="js/index.js"></script>
-    <link rel="stylesheet" href="css/customquery.css" media="screen" type="text/css" /> -->
+    }
+}
 
-</html>
+
+?>

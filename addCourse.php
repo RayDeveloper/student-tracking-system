@@ -52,7 +52,7 @@ $db = new DatabaseAdapter("uwi_courses");
   <input type="radio" name="level" value="Level 1">Level 1<br>
   <input type="radio" name="level" value="Level 2" >Level 2<br>
   <input type="radio" name="level" value="Level 3" >Level 3<br>
-  <input type="radio" name="level" value="Elective" >Level 3<br>
+  <input type="radio" name="level" value="Elective" >Elective<br>
   <input type="radio" name="level" value="Foundation Course" >Foundation Course<br>
 
   <input type="submit" name="submit" value="Add Course">
@@ -61,7 +61,7 @@ $db = new DatabaseAdapter("uwi_courses");
 
 </body>
 <?php
-
+//keeps taking in blank values
  $_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';
  $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
 
