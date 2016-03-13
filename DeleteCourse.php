@@ -8,7 +8,7 @@ $row = FALSE;
 $course=FALSE;
 
 // A variable to create an instance of the database class
-$db = new DatabaseAdapter("uwi_courses");
+$db = new DatabaseAdapter("students");
 $sql="SELECT * FROM Courses ";
 $records=$db->doQuery($sql);
 

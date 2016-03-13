@@ -12,7 +12,7 @@ $row = FALSE;
 $employee=FALSE;
 
 // A variable to create an instance of the database class
-$db = new DatabaseAdapter("uwi_courses");
+$db = new DatabaseAdapter("students");
 
 
 ?>
@@ -26,7 +26,7 @@ $db = new DatabaseAdapter("uwi_courses");
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
