@@ -31,7 +31,7 @@ function changeChart(){
   var url="";
   var resultArray;
   if(dataSrc==="php"){
-    url="api.php"
+    url="DisplayResults.php"
     console.log(url);
   }
 
@@ -57,13 +57,13 @@ function changeChart(){
     var chartData=[];
     console.log("THE DATA");
     console.log(data);
-    for (var rec in data) {
-  //data.foreach(function(rec){
+    //for (var rec in data) {
+  data.foreach(function(rec){
     var chartRec = {};
     chartRec.name = rec.StudentID; 
     chartRec.y = parseInt(rec.Grade);
     chartData.push(chartRec);
-  }
+  });
 //console.log(chartData);
         $('#chart_container').highcharts({
        chart:{type:'pie'},

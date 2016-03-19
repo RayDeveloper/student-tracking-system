@@ -1,15 +1,23 @@
 <?php 
 
 require_once("lib/database.php");
+require_once("highcharts/Highchart.php");
+
+
 $sqlString = '';
 $db = FALSE;
 $connection = FALSE;
 $results = FALSE;
 $row = FALSE;
 $employee=FALSE;
-$data=[];
-$count=0;
+$data= array();
+$fail_var=0;
+$pass_var=0;
+     $pass=array();
+     $fail=array();
+
 $value;
+$student=0;
 // A variable to create an instance of the database class
 $db = new DatabaseAdapter("students");
 
@@ -29,6 +37,7 @@ $db = new DatabaseAdapter("students");
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
+<!-- <body> -->
 <body onload="startReportPageSetup();">
 <div id='cssmenu'>
 <ul>
@@ -79,17 +88,50 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
       $coursy=$course_name->fetch_assoc();
 
        while($student=$records->fetch_assoc()){
+        ///foreach($student as $key => $val){
+         // for($i=0;$i<count($student);$i++){
+           if($student[$course]==4||$student[$course]==6){
+            echo '<br>Pass<br>';
+            $pass_var++;
+            echo $pass_var;
+            //array_push($data,'Pass');
+            //$data[$i]='Pass';
+            //print_r($data);
+            //$val=count($data);
+            //$data[$student++];
+            //echo "<br> $val <br>";
+            //break;
+          }else{
+            echo '<br>Fail<br>';
 
-            $data[$count]['StudentID']= $student['StudentID'];
-            $data[$count]['Grade']=$student[$course];
-            $count++;
+            $fail_var++;
+            echo $fail_var;
+            //array_push($data,'Fail');
+
+           // $data[$i++]='Fail';
+           // print_r($data);
+            //$val=count($data);
+            //echo '<br>fail<br>';
+            //break;
+          }
+       // }
+
+         
+           // $data[$student]['FirstName']
+  
+            //$data[$count]['StudentID']= $student['StudentID'];
+            //$data['StudentID'][$course]=$student["StudentID"];
+            //$data['StudentID']=$student["StudentID"];
+
+            //$data['StudentID']=$student[$course];
+            //$count++;
         //echo $student['StudentID'];
         //echo $student[$course];
         //echo $student['FirstName'];
         //echo $student['LastName'];
         //echo $student[$course];
 
-       // print_r( $student);
+        //print_r( $student);
 
 
 
@@ -106,11 +148,20 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
        // print_r($data);
        // echo"<br>Count:$count<br>";
      }
-     //echo json_encode($data);
+
+
+     $pass[]=$pass_var;
+     $fail[]=$fail_var;
+     //echo json_encode($pass);
+     print_r($pass);
+     echo"<br>";
+     print_r($fail);
+     echo"<br>";
+     print_r($data);
+     echo "<br>";
 
 
     }
-    echo json_encode($data);
 }
 
 function CreateTable($tableData,$course_name){
@@ -132,18 +183,8 @@ function CreateTable($tableData,$course_name){
 }
 
 
-
-
-
-      //   $getQuery="SELECT Word,Frequency FROM wordfrequency WHERE Word = '$key1'";
-      //   $results=$db->doQuery($getQuery); 
-      //   $num=$frequency['Frequency'];
-      //   $num=$num+$row;
-
-      //         array_push($data, $row); 
-      // $row = $results->fetch_assoc();
-
 ?>
+
 
 <div  id="chart_container">
     <div id"chart_sec"></div>
