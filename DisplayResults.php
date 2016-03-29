@@ -15,6 +15,7 @@ $fail_var=0;
 $pass_var=0;
      $pass=array();
      $fail=array();
+     $data=array();
 
 $value;
 $student=0;
@@ -36,6 +37,8 @@ $db = new DatabaseAdapter("students");
    <!-- // <script src="script.js"></script> -->
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
 </head>
 <!-- <body> -->
 <body onload="startReportPageSetup();">
@@ -91,10 +94,30 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
         ///foreach($student as $key => $val){
          // for($i=0;$i<count($student);$i++){
            if($student[$course]==4||$student[$course]==6){
-            echo '<br>Pass<br>';
-            $pass_var++;
-            echo $pass_var;
-            //array_push($data,'Pass');
+            $SID=$student['StudentID'];
+
+              if (!isset($data[$SID]))
+              $data[$SID] = array();
+
+              //$data[$SID]['Grade']=$student[$course];
+              $data[$SID]=$student[$course];
+
+
+
+
+
+
+            // $pass['StudentID']=array();
+            // $pass['Grade']=array();
+
+            // $pass['StudentID']=$student['StudentID'];
+            // $pass['Grade']=$student[$course];
+
+
+            //echo '<br>Pass<br>';
+            //$pass_var++;
+            //echo $pass_var;
+            //array_push($pass,'Pass');
             //$data[$i]='Pass';
             //print_r($data);
             //$val=count($data);
@@ -102,11 +125,11 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
             //echo "<br> $val <br>";
             //break;
           }else{
-            echo '<br>Fail<br>';
+            //echo '<br>Fail<br>';
 
-            $fail_var++;
-            echo $fail_var;
-            //array_push($data,'Fail');
+            //$fail_var++;
+            //echo $fail_var;
+            //array_push($fail,'Fail');
 
            // $data[$i++]='Fail';
            // print_r($data);
@@ -150,15 +173,32 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
      }
 
 
-     $pass[]=$pass_var;
-     $fail[]=$fail_var;
+     //$pass[]=$pass_var;
+     //$fail[]=$fail_var;
      //echo json_encode($pass);
-     print_r($pass);
-     echo"<br>";
-     print_r($fail);
-     echo"<br>";
-     print_r($data);
-     echo "<br>";
+     //echo "the data array<br>";
+     //print_r($data);
+     //echo"<br>";
+     //$newdata=implode(" ",$data);
+     //$issues='';
+     //$issues=$data;
+     echo json_encode($data);
+    //  echo"<br>";
+
+    //  echo "the pass array<br>";
+    //  print_r($pass);
+    //  //echo json_encode($pass);
+    //  echo"<br>";
+    //  echo "the fail array<br>";
+    //  print_r($fail);
+    //  echo"<br>";
+    //  echo "the merged array<br>";
+    //  $result=array_merge($pass,$fail);
+    //  print_r($result);
+    //  echo"<br>";
+    //  echo"Json ecncode<br>";
+    // // echo json_encode($result);
+
 
 
     }
@@ -209,7 +249,11 @@ function CreateTable($tableData,$course_name){
 </label>
 </div>
 </div>
-
+ </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        
+        <script src="jslibs/jquery/dist/jquery.min.js"></script>
+        <script src="jslibs/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="jslibs/highcharts/highcharts.js"></script>
         <script src="js/main.js"></script>
 </body>
