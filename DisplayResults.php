@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 require_once("lib/database.php");
-require_once("highcharts/Highchart.php");
+
 
 
 $sqlString = '';
@@ -46,18 +46,14 @@ $db = new DatabaseAdapter("students");
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
    <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li ><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
+   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
    <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
     <li><a href='addCourse.php'><span>Add Course</span></a></li>
     <li ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
     <li class='active' ><a href='Customquery.php'><span>Custom Query</span></a></li>
-
    <li><a href='logout.php'><span>Logout</span></a></li>
- 
+
 </ul>
 </div>
 <H1 align="center">Custom Query</H1>
@@ -74,7 +70,7 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
     	//echo "<br>";
     	//echo $course;
     	//echo "<br>";
-
+      $trydata=array();
       $sql="SELECT FirstName,LastName,StudentID,$course FROM uwi ";
       $sql_courseName="SELECT Course_Name From Courses where Course_Code LIKE '$value' ";
       //$sql_courseName="SELECT * From Courses ";
@@ -98,123 +94,36 @@ if ( isset($_POST['course']) && is_array($_POST['course']) ) {
 
               if (!isset($data[$SID]))
               $data[$SID] = array();
-
               //$data[$SID]['Grade']=$student[$course];
-              $data[$SID]=$student[$course];
-
-
-
-
-
-
-            // $pass['StudentID']=array();
-            // $pass['Grade']=array();
-
-            // $pass['StudentID']=$student['StudentID'];
-            // $pass['Grade']=$student[$course];
-
-
-            //echo '<br>Pass<br>';
-            //$pass_var++;
-            //echo $pass_var;
-            //array_push($pass,'Pass');
-            //$data[$i]='Pass';
-            //print_r($data);
-            //$val=count($data);
-            //$data[$student++];
-            //echo "<br> $val <br>";
-            //break;
+              //$data[$SID]=$student[$course];
+              array_push($trydata, $student[$course]);
           }else{
-            //echo '<br>Fail<br>';
 
-            //$fail_var++;
-            //echo $fail_var;
-            //array_push($fail,'Fail');
-
-           // $data[$i++]='Fail';
-           // print_r($data);
-            //$val=count($data);
-            //echo '<br>fail<br>';
-            //break;
           }
-       // }
-
-         
-           // $data[$student]['FirstName']
-  
-            //$data[$count]['StudentID']= $student['StudentID'];
-            //$data['StudentID'][$course]=$student["StudentID"];
-            //$data['StudentID']=$student["StudentID"];
-
-            //$data['StudentID']=$student[$course];
-            //$count++;
-        //echo $student['StudentID'];
-        //echo $student[$course];
-        //echo $student['FirstName'];
-        //echo $student['LastName'];
-        //echo $student[$course];
-
-        //print_r( $student);
-
-
-
-             //$data['StudentID']= $student['StudentID'];
-            //$data['Grade']=$student['$value'];
-
-        //$student=$student["FirstName"];
-        //print_r($student) ;
-        //echo ($student["FirstName"]);
         CreateTable($student,$coursy['Course_Name']);
-        //echo json_encode($student);
-       //print_r($student);
-       // echo"data array:<br>";
-       // print_r($data);
-       // echo"<br>Count:$count<br>";
      }
-
-
-     //$pass[]=$pass_var;
-     //$fail[]=$fail_var;
-     //echo json_encode($pass);
-     //echo "the data array<br>";
-     //print_r($data);
-     //echo"<br>";
-     //$newdata=implode(" ",$data);
-     //$issues='';
-     //$issues=$data;
-     echo json_encode($data);
-    //  echo"<br>";
-
-    //  echo "the pass array<br>";
-    //  print_r($pass);
-    //  //echo json_encode($pass);
-    //  echo"<br>";
-    //  echo "the fail array<br>";
-    //  print_r($fail);
-    //  echo"<br>";
-    //  echo "the merged array<br>";
-    //  $result=array_merge($pass,$fail);
-    //  print_r($result);
-    //  echo"<br>";
-    //  echo"Json ecncode<br>";
-    // // echo json_encode($result);
 
 
 
     }
+    //echo json_encode($data);
+    //echo json_encode($trydata);
+
+
 }
+
 
 function CreateTable($tableData,$course_name){
 //display data better than this
   //Remove the S and put the INFO in
- 
+
   echo "<table class='table table-bordered'>";
   // echo '<tr>
   // <th>Word</th>
   // <th>Score</th>
   // </tr>';
   foreach ($tableData as $key1 => $row) {
-      echo "<tr> <th>$key1</th><td>$row</td> </tr>";  
+      echo "<tr> <th>$key1</th><td>$row</td> </tr>";
   }
   echo "<tr><th>$course_name</th></tr>";
   echo "</tbody>";
@@ -224,7 +133,6 @@ function CreateTable($tableData,$course_name){
 
 
 ?>
-
 
 <div  id="chart_container">
     <div id"chart_sec"></div>
@@ -251,7 +159,7 @@ function CreateTable($tableData,$course_name){
 </div>
  </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-        
+
         <script src="jslibs/jquery/dist/jquery.min.js"></script>
         <script src="jslibs/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="jslibs/highcharts/highcharts.js"></script>

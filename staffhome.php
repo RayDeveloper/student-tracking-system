@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("lib/database.php");
 /*
 $host="localhost";
@@ -36,7 +36,7 @@ $results=$db->doQuery($sql);
 
  //print_r($_POST);//print out the whole post
   //print_r($_POST['mytext']);
-//mysql_query($sql,$con); 
+//mysql_query($sql,$con);
 
 //mysql_query($sql,$con);
 
@@ -72,7 +72,7 @@ if(mysql_query($sql,$con)){
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
- 
+
 
 </head>
 
@@ -82,15 +82,14 @@ if(mysql_query($sql,$con)){
 <ul>
    <li class='active'><a href='#'><span>Full Listing</span></a></li>
    <li><a href='findStudent.php'><span>Find a student</span></a></li>
-   <li><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
    <li><a href='addStudent.php'><span>Add A Student</span></a></li>
     <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-   <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
    <li><a href='AddCourse.php'><span>Add Course</span></a></li>
+   <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
+   <li><a href='Customquery.php'><span>Custom Query</span></a></li>
    <li><a href='logout.php'><span>Logout</span></a></li>
-    
+
 </ul>
 </div>
 <H1 align="center">Full listing</H1>

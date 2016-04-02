@@ -29,43 +29,42 @@ function changeChart(){
   var $chart=("#chart_sec");
   var dataSrc=$(".datasrc").filter(":checked").val();
   var url="";
-  if(dataSrc==="php"){
-    url="DisplayResults.php"
-    console.log(url);
-  }
-
+  // if(dataSrc==="php"){
+  //   url="api.php"
+  //   console.log(url);
+  // }
+//url="api.php";
+url="DisplayResults.php";
+console.log(url);
   $.get(url,function(data){
-     //var datas = $.parseJSON(data);
-      console.log(data);
-
+     // console.log(data);
         if(choice==="Pie Chart"){
-          //console.log("about to enter drawPieChart");
       drawPieChart($chart,data);
-
     }else{
       drawBarChart($chart,data);
     }
 
 
-  },'json');//had to add 'json' because PHP echos the json_encode check 'DisplayResults.php'
+  });//had to add 'json' because PHP echos the json_encode check 'DisplayResults.php'
 
   }
 
   function drawPieChart($chart, data){
-    console.log(data);
+    //console.log(data);
     console.log("inside drawPieChart");
     var chartData=[];
-    //for(var rec in data){
-  data.forEach(function(rec){
+    for(var rec in data){
+  //data.forEach(function(rec){
+    console.log(rec.SID);
     var chartRec = {};
-    chartRec.name = rec.StudentID; 
-    chartRec.y = parseFloat(rec.course);
+    //chartRec.name = rec.StudentID; 
+    //chartRec.y = parseFloat(rec.course);
     chartData.push(chartRec);
     // chartRec.name = rec.Word;
     // chartRec.y = parseFloat(rec.Frequency);
     // chartData.push(chartRec);
-  });
-console.log(chartData);
+  }//);
+//console.log(chartData);
         $('#chart_container').highcharts({
        chart:{type:'pie'},
        title:{text:'Pass rate'},

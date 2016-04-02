@@ -1,7 +1,7 @@
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 
-<?php 
+<?php
 
 require_once("lib/database.php");
 $sqlString = '';
@@ -35,18 +35,16 @@ $db = new DatabaseAdapter("students");
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
    <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li ><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
+   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
    <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
     <li><a href='addCourse.php'><span>Add Course</span></a></li>
     <li ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
+    <li><a href='Customquery.php'><span>Custom Query</span></a></li>
     <li class='active' ><a href='Customquery.php'><span>Custom Query</span></a></li>
 
    <li><a href='logout.php'><span>Logout</span></a></li>
- 
+
 </ul>
 </div>
 <H1 align="center">Custom Query</H1>

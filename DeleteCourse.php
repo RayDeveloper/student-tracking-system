@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("lib/database.php");
 $sqlString = '';
 $db = FALSE;
@@ -15,6 +15,11 @@ $records=$db->doQuery($sql);
 if(isset($_POST['coursecode'])){
   $Deletequery =("DELETE FROM Courses WHERE  Course_Code='$_POST[coursecode]' ");
   $db->doQuery($Deletequery);
+  $new_code= str_replace("INFO","S",$_POST['coursecode']);
+
+  $sql3= "ALTER TABLE uwi DROP COLUMN $new_code";
+  $db->doQuery($sql3);
+
 }
 ?>
 
@@ -36,32 +41,28 @@ if(isset($_POST['coursecode'])){
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
    <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li ><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
+   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
    <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
-    <li><a href='addCourse.php'><span>Add Course</span></a></li>
-    <li  class='active' ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
+   <li><a href='addCourse.php'><span>Add Course</span></a></li>
+     <li  class='active' ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
     <li><a href='Customquery.php'><span>Custom Query</span></a></li>
-
    <li><a href='logout.php'><span>Logout</span></a></li>
 
-   
+
 
 </ul>
 </div>
 <H1 align="center">Delete A Course</H1>
 
 <form action="DeleteCourse.php" align="center" method="post">
-  Course Name: <input type="text" name="coursename"><br>
+  <!-- Course Name: <input type="text" name="coursename"><br> -->
   Course Code: <input type="text" name="coursecode"><br>
      <label >Choose Course Level</label></br>
   <input type="radio" name="level" value="Level 1">Level 1<br>
   <input type="radio" name="level" value="Level 2" >Level 2<br>
   <input type="radio" name="level" value="Level 3" >Level 3<br>
-  <input type="radio" name="level" value="Elective" >Level 3<br>
+  <input type="radio" name="level" value="Elective" >Elective<br>
   <input type="radio" name="level" value="Foundation Course" >Foundation Course<br>
 
   <input type="submit" name="submit" value="Delete Course">

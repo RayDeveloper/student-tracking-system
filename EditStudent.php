@@ -17,19 +17,19 @@ $db = new DatabaseAdapter("students");
 
 
 if(isset($_POST['update'])){
-$UpdateQuery ="UPDATE uwi SET FirstName='$_POST[fname]' , LastName='$_POST[lname]' , 
+$UpdateQuery ="UPDATE uwi SET FirstName='$_POST[fname]' , LastName='$_POST[lname]' ,
 StudentID='$_POST[SID]' ,S1400='$_POST[S1400]', S1500='$_POST[S1500]' ,S1506='$_POST[S1506]' ,
 S1405='$_POST[S1405]', S1501='$_POST[S1501]' , S1502='$_POST[S1502]', S1415='$_POST[S1415]' ,
  S1503='$_POST[S1503]' , S1507='$_POST[S1507]' , S1420='$_POST[S1420]' ,
  S1502_='$_POST[S1502_]' , S1504='$_POST[S1504]' , S1410='$_POST[S1410]' ,
   S1505='$_POST[S1505]' , S1507_='$_POST[S1507_]' , S1425='$_POST[S1425]'  ,
- S1505_='$_POST[S1505_]' , S1506_='$_POST[S1506_]' , S2415='$_POST[S2415]' ,  
- S2420='$_POST[S2420]', S2425='$_POST[S2425]' , S2430='$_POST[S2430]' , S2400='$_POST[S2400]' ,  
- S2405='$_POST[S2405]' , S2410='$_POST[S2410]' , S3400='$_POST[S3400]',  S3405='$_POST[S3405]' , S2500= '$_POST[S2500]' , S3415='$_POST[S3415]' , S3440='$_POST[S3440]'  ,S3410='$_POST[S3410]' , S3420='$_POST[S3420]' , 
+ S1505_='$_POST[S1505_]' , S1506_='$_POST[S1506_]' , S2415='$_POST[S2415]' ,
+ S2420='$_POST[S2420]', S2425='$_POST[S2425]' , S2430='$_POST[S2430]' , S2400='$_POST[S2400]' ,
+ S2405='$_POST[S2405]' , S2410='$_POST[S2410]' , S3400='$_POST[S3400]',  S3405='$_POST[S3405]' , S2500= '$_POST[S2500]' , S3415='$_POST[S3415]' , S3440='$_POST[S3440]'  ,S3410='$_POST[S3410]' , S3420='$_POST[S3420]' ,
  S3435='$_POST[S3435]' , S3490='$_POST[S3490]'  ,
- S3425='$_POST[S3425]' , S3430='$_POST[S3430]' , S3500='$_POST[S3500]',  
+ S3425='$_POST[S3425]' , S3430='$_POST[S3430]' , S3500='$_POST[S3500]',
  S3520='$_POST[S3520]' , S3510='$_POST[S3510]' , S1101='$_POST[S1101]' ,
- S1301='$_POST[S1301]' , S1102='$_POST[S1102]' , S1105='$_POST[S1105]' , 
+ S1301='$_POST[S1301]' , S1102='$_POST[S1102]' , S1105='$_POST[S1105]' ,
  L1_Core='$_POST[L1_Core]' , L1_Electives='$_POST[L1_Electives]' , ADV_Core='$_POST[ADV_Core]' ,
  ADV_Electives='$_POST[ADV_Electives]' , FOUN='$_POST[FOUN]' , Total_Credits='$_POST[Total_Credits]' ,
  Additional_Courses='$_POST[Additional_Courses]' , Completed='$_POST[Completed]'  WHERE StudentID='$_POST[hidden]' ";
@@ -62,13 +62,12 @@ $db->doQuery($UpdateQuery);
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
    <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
    <li><a href='addStudent.php'><span>Add A Student</span></a></li>
    <li class='active'><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
       <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
    <li><a href='AddCourse.php'><span>Add Course</span></a></li>
+   <li><a href='Customquery.php'><span>Custom Query</span></a></li>
    <li><a href='logout.php'><span>Logout</span></a></li>
 </ul>
 </div>
@@ -217,7 +216,7 @@ echo "</tr>";
 echo "<td>" . "<input type=hidden name=hidden value=" . $row['StudentID'] . " </td>";
 echo "<td>" . "<input type=submit name=update value=update"  .  " </td>";
 echo "</form>";
- }//end while 
+ }//end while
  echo "</table>";
 
 
@@ -359,7 +358,7 @@ echo "<td>".$row['Total_Credits']."</td>";
 echo "<td>".$row['Additional_Courses']."</td>";
 echo "<td>".$row['Completed']."</td>";
 echo "</tr>";
- }//end while 
+ }//end while
  echo "</table>";
  // $fname=$row['FirstName'];
   //$lname=$row['LastName'];

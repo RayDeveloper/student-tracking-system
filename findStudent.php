@@ -38,16 +38,15 @@ $output='';
 <div id='cssmenu'>
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
-   <li class='active'><a href='#'><span>Find a Student</span></a></li>
-   <li><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
+   <li class='active'><a href='findStudent.php'><span>Find a Student</span></a></li>
    <li><a href='addStudent.php'><span>Add A Student</span></a></li>
       <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-      <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
    <li><a href='AddCourse.php'><span>Add Course</span></a></li>
+   <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
+   <li><a href='Customquery.php'><span>Custom Query</span></a></li>
    <li><a href='logout.php'><span>Logout</span></a></li>
-      
+
 </ul>
 </div>
 <H1 align="center">Search for a student</H1>
@@ -185,7 +184,7 @@ echo "<td>".$row['Total_Credits']."</td>";
 echo "<td>".$row['Additional_Courses']."</td>";
 echo "<td>".$row['Completed']."</td>";
 echo "</tr>";
- }//end while 
+ }//end while
  echo "</table>";
  // $fname=$row['FirstName'];
   //$lname=$row['LastName'];

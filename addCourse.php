@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("lib/database.php");
 $sqlString = '';
 $db = FALSE;
@@ -30,14 +30,12 @@ $db = new DatabaseAdapter("students");
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
    <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li ><a href='#'><span>Day Students</span></a></li>
-   <li><a href='#'><span>Evening Students</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
+   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
    <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
    <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-   <li><a href='#'><span>Add A Student</span></a></li>
     <li class='active'><a href='addCourse.php'><span>Add Course</span></a></li>
     <li ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
+    <li><a href='Customquery.php'><span>Custom Query</span></a></li>
    <li><a href='logout.php'><span>Logout</span></a></li>
 
 </ul>
@@ -66,11 +64,31 @@ $db = new DatabaseAdapter("students");
  $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
 
  $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
- 
+
 
 
 $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level) Values ('$_CourseName','$_CourseCode','$_CourseLevel')";
 $db->doQuery($sql);
+$new_code= str_replace("INFO","S",$_CourseCode);
+$place_code= str_replace("S","",$new_code);
+
+if(strstr($place_code, '1')){
+  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1425";
+  $db->doQuery($sql2);
+}else if(strstr($place_code, '2')){
+  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S2410";
+  $db->doQuery($sql2);
+}else if(strstr($place_code, '3')){
+  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S3510";
+  $db->doQuery($sql2);
+}else{
+  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1105";
+  $db->doQuery($sql2);
+}
+
+
+
+
 ?>
 
 </html>
