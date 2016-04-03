@@ -101,11 +101,76 @@
   background: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
 }
 
-#formy { 
+#formy {
     margin-top: 50px;
     margin-bottom: 80px;
     margin-right: 100px;
     margin-left: 550px;
 width:250px;
 
+}
+#navmenu {
+  /*margin: 0;*/
+	/*padding: 0;*/
+  margin: auto;
+   width: 100%;
+   padding: 0px;
+}
+
+#navmenu ul{
+	margin: 0;
+	padding: 0;
+	height:40px;
+  background: #000000;
+}
+
+#navmenu li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	position: relative;
+	background:#000000;
+
+
+}
+#navmenu ul li:hover,
+#navmenu ul li.active {
+  background: #1275ae;
+
+}
+#navmenu ul a.active {
+  background: #1275ae;
+
+}
+
+#navmenu ul li a{
+	text-align:center;
+	text-decoration:none;
+	font-family:Arial, Helvetica, sans-serif;
+	height:40px;
+	width:150px;
+	display:block;
+	color:#f2f2f2;
+	padding-top:7px;
+
+}
+
+#navmenu ul ul{
+	position:absolute;
+	visibility: hidden;
+	top:30px;
+}
+
+#navmenu ul li:hover ul {
+	visibility:visible;
+}
+
+#navmenu li:hover {
+	background:#3366CC;
+}
+
+#navmenu ul li:hover ul li a:hover{
+	background:#595959;
+	color:#FFFFFF;
 }

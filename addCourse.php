@@ -16,6 +16,8 @@ $db = new DatabaseAdapter("students");
 <html>
 
 <head>
+  <title>Add Course</title>
+
   <meta charset="UTF-8">
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,28 +28,57 @@ $db = new DatabaseAdapter("students");
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-<div id='cssmenu'>
+<!-- <div id='cssmenu'> -->
+<div id="wrapper">
+<div id="navmenu">
+
 <ul>
-   <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
-   <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
-   <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
-   <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-    <li class='active'><a href='addCourse.php'><span>Add Course</span></a></li>
-    <li ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
-    <li><a href='Customquery.php'><span>Custom Query</span></a></li>
-   <li><a href='logout.php'><span>Logout</span></a></li>
+<li><a href="">Student</a>
+
+<ul>
+<li><a href="staffhome.php">Student List</a></li>
+<li><a href="findstudent.php">Find Student</a></li>
+<li><a href="addStudent.php">Add Student</a></li>
+<li><a href="EditStudent.php">Edit Student</a></li>
+<li><a href="DeleteStudent.php">Delete Student</a></li>
+
+</ul>
+</li>
+
+<li class='active'><a href="">Course</a>
+<ul>
+<li><a href="allCourses.php">Course Listing</a></li>
+<li><a class='active' href="addCourse.php">Add Course</a></li>
+<li><a href="editCourse.php">Edit Course</a></li>
+<li><a href="DeleteCourse.php">Delete Course</a></li>
+</ul>
+</li>
+
+<li><a href="Customquery.php">Custom Query</a>
+</li>
+
+<li><a href="logout.php">Log out</a>
+
+</li>
 
 </ul>
 </div>
+</div>
+
+
+
+
+
+
+<!-- </div> -->
 <H1 align="center">Add a Course</H1>
 
 <form action="addCourse.php" align="center" method="post">
-  Course Name: <input type="text" name="coursename"><br>
-  Course Code: <input type="text" name="coursecode"><br>
+  Course Name: <input type="text" required name="coursename"><br>
+  Course Code: <input type="text" required name="coursecode"><br>
 
    <label >Choose Course Level</label></br>
-  <input type="radio" name="level" value="Level 1">Level 1<br>
+  <input type="radio" name="level" required value="Level 1">Level 1<br>
   <input type="radio" name="level" value="Level 2" >Level 2<br>
   <input type="radio" name="level" value="Level 3" >Level 3<br>
   <input type="radio" name="level" value="Elective" >Elective<br>
@@ -60,31 +91,38 @@ $db = new DatabaseAdapter("students");
 </body>
 <?php
 //keeps taking in blank values
- $_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';
- $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
+if(isset($_POST['submit'])){
+  $_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';
+  $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
 
- $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
+  $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
 
+  $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level) Values ('$_CourseName','$_CourseCode','$_CourseLevel')";
+  $db->doQuery($sql);
+  $new_code= str_replace("INFO ","S",$_CourseCode);
+  $place_code= str_replace("S","",$new_code);
+  //echo "new code: $new_code<br>";
+  //echo "place code: $place_code<br>";
+  if(strstr($place_code, '1')){
+    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1425";
+    $db->doQuery($sql2);
+  }else if(strstr($place_code, '2')){
+    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S2410";
+    $db->doQuery($sql2);
+  }else if(strstr($place_code, '3')){
+    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S3510";
+    $db->doQuery($sql2);
+  }else{
+    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1105";
+    $db->doQuery($sql2);
+  }
 
-
-$sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level) Values ('$_CourseName','$_CourseCode','$_CourseLevel')";
-$db->doQuery($sql);
-$new_code= str_replace("INFO","S",$_CourseCode);
-$place_code= str_replace("S","",$new_code);
-
-if(strstr($place_code, '1')){
-  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1425";
-  $db->doQuery($sql2);
-}else if(strstr($place_code, '2')){
-  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S2410";
-  $db->doQuery($sql2);
-}else if(strstr($place_code, '3')){
-  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S3510";
-  $db->doQuery($sql2);
-}else{
-  $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1105";
-  $db->doQuery($sql2);
 }
+
+
+
+
+
 
 
 

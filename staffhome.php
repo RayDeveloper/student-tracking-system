@@ -17,13 +17,21 @@ $sqlString = '';
 $db = FALSE;
 $connection = FALSE;
 $results = FALSE;
+$results2 = FALSE;
+
 $row = FALSE;
 $employee=FALSE;
+$tricks=FALSE;
+
 
 // A variable to create an instance of the database class
 $db = new DatabaseAdapter("students");
 $sql="SELECT * FROM uwi ";
 $results=$db->doQuery($sql);
+
+// $try="Show columns From courses";
+// $results2=$db->doQuery($try);
+
 
 //if(isset($_POST['mytext[]'])){
 //  echo "inside";
@@ -61,7 +69,7 @@ if(mysql_query($sql,$con)){
 
   <meta charset="UTF-8">
 
-  <title>Login Form</title>
+  <title>Student Listing</title>
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,21 +86,42 @@ if(mysql_query($sql,$con)){
 
 
 <body>
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='#'><span>Full Listing</span></a></li>
-   <li><a href='findStudent.php'><span>Find a student</span></a></li>
-   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
-    <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
-   <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-   <li><a href='AddCourse.php'><span>Add Course</span></a></li>
-   <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
-   <li><a href='Customquery.php'><span>Custom Query</span></a></li>
-   <li><a href='logout.php'><span>Logout</span></a></li>
+  <div id="wrapper">
+  <div id="navmenu">
 
-</ul>
-</div>
-<H1 align="center">Full listing</H1>
+  <ul>
+  <li class='active'><a href="#">Student</a>
+
+  <ul>
+  <li><a class='active' href="staffhome.php">Student List</a></li>
+  <li><a href="findstudent.php">Find Student</a></li>
+  <li><a href="addStudent.php">Add Student</a></li>
+  <li><a href="EditStudent.php">Edit Student</a></li>
+  <li><a href="DeleteStudent.php">Delete Student</a></li>
+
+  </ul>
+  </li>
+
+  <li><a href="#">Course</a>
+  <ul>
+    <li><a href="allCourses.php">Course Listing</a></li>
+  <li><a href="addCourse.php">Add Course</a></li>
+  <li><a href="editCourse.php">Edit Course</a></li>
+  <li><a href="DeleteCourse.php">Delete Course</a></li>
+  </ul>
+  </li>
+
+  <li><a href="Customquery.php">Custom Query</a>
+  </li>
+
+  <li><a href="logout.php">Log out</a>
+
+  </li>
+
+  </ul>
+  </div>
+  </div>
+<H1 align="center">Student listing</H1>
 <table width="200" border="1" cellpadding="1" cellspacing="1" class="table table-bordered">
   <tr>
 <th>First Name</th>
@@ -216,9 +245,10 @@ echo "</tr>";
 
 
 }//end while
-?>
 
+?>
 </table>
+
 
 
 

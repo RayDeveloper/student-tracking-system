@@ -34,7 +34,7 @@ S1405='$_POST[S1405]', S1501='$_POST[S1501]' , S1502='$_POST[S1502]', S1415='$_P
  ADV_Electives='$_POST[ADV_Electives]' , FOUN='$_POST[FOUN]' , Total_Credits='$_POST[Total_Credits]' ,
  Additional_Courses='$_POST[Additional_Courses]' , Completed='$_POST[Completed]'  WHERE StudentID='$_POST[hidden]' ";
 $db->doQuery($UpdateQuery);
-};
+}
 
 
 
@@ -46,6 +46,7 @@ $db->doQuery($UpdateQuery);
 <html>
 
 <head>
+  <title>Edit Student</title>
   <meta charset="UTF-8">
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,7 +59,7 @@ $db->doQuery($UpdateQuery);
 <body>
 
 
-<div id='cssmenu'>
+<!-- <div id='cssmenu'>
 <ul>
    <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
    <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
@@ -70,10 +71,44 @@ $db->doQuery($UpdateQuery);
    <li><a href='Customquery.php'><span>Custom Query</span></a></li>
    <li><a href='logout.php'><span>Logout</span></a></li>
 </ul>
+</div> -->
+<div id="wrapper">
+<div id="navmenu">
+
+<ul>
+<li class='active'><a href="">Student</a>
+
+<ul>
+<li><a href="staffhome.php">Student List</a></li>
+<li><a href="findstudent.php">Find Student</a></li>
+<li><a href="addStudent.php">Add Student</a></li>
+<li><a class='active' href="EditStudent.php">Edit Student</a></li>
+<li><a href="DeleteStudent.php">Delete Student</a></li>
+</ul>
+</li>
+
+<li><a href="">Course</a>
+<ul>
+  <li><a href="allCourses.php">Course Listing</a></li>
+<li><a href="addCourse.php">Add Course</a></li>
+<li><a href="editCourse.php">Edit Course</a></li>
+<li><a href="DeleteCourse.php">Delete Course</a></li>
+</ul>
+</li>
+
+<li><a href="Customquery.php">Custom Query</a>
+</li>
+
+<li><a href="logout.php">Log out</a>
+
+</li>
+
+</ul>
+</div>
 </div>
 <H1 align="center">Search for a student</H1>
 <form id="formy" action="editStudent.php" method="post"/>
-  <input type="text" name="search" placeholder="Student ID Number"/>
+  <input type="text" name="search" required placeholder="Student ID Number"/>
   <input type="submit" name="submit" value= "Search" />
 </form>
 
@@ -162,7 +197,8 @@ echo "<td>" . "<input type=text name=fname value=" . $row['FirstName'] . " </td>
 echo "<td>". "<input type=text name=lname value=" .   $row['LastName'] .  " </td>";
 echo "<td>"."<input type=text name=SID value=" . $row['StudentID'] .  "  </td>";
 echo "<td>" . "<input type=text name=S1400 value=" . $row['S1400'] . " </td>";
-echo "<td>" . "<input type=text name=S1500 value=" . $row['S1500'] . " </td>";
+//echo "<td>" . "<input type=text name=S1500 value=" . $row['S1500'] .  "</td> ";
+echo "<td>  <input type='text' name='S1500' value= '$row[S1500]'    </td> ";
 echo "<td>" . "<input type=text name=S1506 value=" . $row['S1506'] . " </td>";
 echo "<td>" . "<input type=text name=S1405 value=" . $row['S1405'] . " </td>";
 echo "<td>" . "<input type=text name=S1501 value=" . $row['S1501'] . " </td>";

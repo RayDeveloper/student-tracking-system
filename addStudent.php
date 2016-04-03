@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <title>Add Student</title>
   <meta charset="UTF-8">
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,27 +13,47 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-<div id='cssmenu'>
-<ul>
-   <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
-   <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li class='active'><a href='#'><span>Add A Student</span></a></li>
-   <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
-   <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-    <li><a href='addCourse.php'><span>Add Course</span></a></li>
-       <li><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
-       <li><a href='Customquery.php'><span>Custom Query</span></a></li>
-   <li><a href='logout.php'><span>Logout</span></a></li>
+  <div id="wrapper">
+  <div id="navmenu">
 
+  <ul>
+  <li class='active'><a href="">Student</a>
 
-</ul>
-</div>
+  <ul>
+  <li><a href="staffhome.php">Student List</a></li>
+  <li><a href="findstudent.php">Find Student</a></li>
+  <li><a class='active' href="addStudent.php">Add Student</a></li>
+  <li><a href="EditStudent.php">Edit Student</a></li>
+  <li><a href="DeleteStudent.php">Delete Student</a></li>
+
+  </ul>
+  </li>
+
+  <li><a href="">Course</a>
+  <ul>
+  <li><a href="allCourses.php">Course Listing</a></li>
+  <li><a href="addCourse.php">Add Course</a></li>
+  <li><a href="editCourse.php">Edit Course</a></li>
+  <li><a href="DeleteCourse.php">Delete Course</a></li>
+  </ul>
+  </li>
+
+  <li><a href="Customquery.php">Custom Query</a>
+  </li>
+
+  <li><a href="logout.php">Log out</a>
+
+  </li>
+
+  </ul>
+  </div>
+  </div>
 <H1 align="center">Add a student</H1>
 
-<form action="insertdb.php" method="post">
-  First name: <input type="text" name="fname"><br>
-  Last name: <input type="text" name="lname"><br>
-  Student ID: <input type="text" name="ID"><br>
+<form action="insertdb.php" align="center" method="post">
+  First name: <input type="text" required name="fname"><br>
+  Last name: <input type="text" required name="lname"><br>
+  Student ID: <input type="text" required name="ID"><br>
   1400:<input type="text" name="1400"><br>
   1500:<input type="text" name="1500"><br>
   1506:<input type="text" name="1506"><br>
@@ -85,7 +106,7 @@
   Additional Courses: <input type="text" name="Additional_Courses"><br>
   Completed: <input type="text" name="Completed"><br>
 
-  <input type="submit" name="submit" value="Add Student">
+  <input style="position: relative; left:300px; bottom:900px; height:100px; width:100px" type="submit" name="submit" value="Add Student">
 
 </form>
 

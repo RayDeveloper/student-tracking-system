@@ -21,39 +21,59 @@ $db = new DatabaseAdapter("students");
 <html>
 
 <head>
+  <title>Custom Query</title>
   <meta charset="UTF-8">
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <!-- <script src="script.js"></script> -->
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-<div id='cssmenu'>
-<ul>
-   <li ><a href='staffhome.php'><span>Full Listing</span></a></li>
-   <li ><a href='findStudent.php'><span>Find a Student</span></a></li>
-   <li><a href='addStudent.php'><span>Add A Student</span></a></li>
-   <li><a href='EditStudent.php'><span>Edit Student</span></a></li>
-   <li ><a href='DeleteStudent.php'><span>Delete a Student</span></a></li>
-    <li><a href='addCourse.php'><span>Add Course</span></a></li>
-    <li ><a href='DeleteCourse.php'><span>Delete Course</span></a></li>
-    <li class='active' ><a href='Customquery.php'><span>Delete Course</span></a></li>
+  <div id="wrapper">
+  <div id="navmenu">
 
+  <ul>
+  <li><a href="">Student</a>
 
-   <li><a href='logout.php'><span>Logout</span></a></li>
+  <ul>
+  <li><a href="staffhome.php">Student List</a></li>
+  <li><a href="findstudent.php">Find Student</a></li>
+  <li><a href="addStudent.php">Add Student</a></li>
+  <li><a href="EditStudent.php">Edit Student</a></li>
+  <li><a href="DeleteStudent.php">Delete Student</a></li>
 
-</ul>
-</div>
+  </ul>
+  </li>
+
+  <li><a href="">Course</a>
+  <ul>
+    <li><a href="allCourses.php">Course Listing</a></li>
+  <li><a href="addCourse.php">Add Course</a></li>
+  <li><a href="editCourse.php">Edit Course</a></li>
+  <li><a href="DeleteCourse.php">Delete Course</a></li>
+  </ul>
+  </li>
+
+  <li><a class='active' href="Customquery.php">Custom Query</a>
+  </li>
+
+  <li><a href="logout.php">Log out</a>
+
+  </li>
+
+  </ul>
+  </div>
+  </div>
 <H1 align="center">Custom Query</H1>
 
 <form action="DisplayCourses.php" align="center" method="POST">
 
 <select name='Course_Level' onchange='this.form.submit()'>
   <option selected>Select a Year</option>
-  <option value="level 1">Year 1</option>
+  <option value="level 1" >Year 1</option>
   <option value="level 2">Year 2</option>
   <option value="level 3">Year 3</option>
   <option value="Elective">Elective</option>
