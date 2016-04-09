@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once("lib/database.php");
 
 
@@ -13,12 +13,16 @@ $employee=FALSE;
 $data= array();
 $fail_var=0;
 $pass_var=0;
+$records=FALSE;
+$student=FALSE;
+$studentas=array();
+$student_grade=array();
      $pass=array();
      $fail=array();
      $data=array();
 
 $value;
-$student=0;
+$student=array();
 // A variable to create an instance of the database class
 $db = new DatabaseAdapter("students");
 
@@ -47,7 +51,7 @@ $db = new DatabaseAdapter("students");
   <div id="navmenu">
 
   <ul>
-  <li><a href="">Student</a>
+  <li><a href="#">Student</a>
 
   <ul>
   <li><a href="staffhome.php">Student List</a></li>
@@ -59,7 +63,7 @@ $db = new DatabaseAdapter("students");
   </ul>
   </li>
 
-  <li><a href="">Course</a>
+  <li><a href="#">Course</a>
   <ul>
     <li><a href="allCourses.php">Course Listing</a></li>
   <li><a href="addCourse.php">Add Course</a></li>
@@ -68,7 +72,7 @@ $db = new DatabaseAdapter("students");
   </ul>
   </li>
 
-  <li class='active'><a href="Customquery.php">Custom Query</a>
+  <li class='active'><a href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -78,13 +82,19 @@ $db = new DatabaseAdapter("students");
   </ul>
   </div>
   </div>
-<H1 align="center">Custom Query</H1>
-<h3 align="center"> Results</h3>
+<H1 align="center">Custom Report</H1>
+<h3 align="center"> Results of query</h3>
+
 <?php
+
+
 if ( isset($_POST['course']) && is_array($_POST['course']) ) {
+
+
   $course_name;
 $course;
 $coursy;
+
     foreach ( $_POST['course'] as $v => $value ) {
     	//echo "Value:$value <br>";
       if (strpos($value, 'FOUN') !== false) {
@@ -92,7 +102,7 @@ $coursy;
         //echo "<br>";
         $course = str_replace(' ', '', $nospace);
         $sql="SELECT FirstName,LastName,StudentID,$course FROM uwi ";
-        $sql_courseName="SELECT Course_Name From Courses where Course_Code LIKE '$value' ";
+        $sql_courseName="SELECT Course_Name,Course_Code From Courses where Course_Code LIKE '$value' ";
         //echo $sql_courseName;
         $records=$db->doQuery($sql);
         //print_r($records);
@@ -102,10 +112,11 @@ $coursy;
         $coursy=$course_name->fetch_assoc();
 
          while($student=$records->fetch_assoc()){
-           CreateTable($student,$coursy['Course_Name']);
-           //echo($coursy['Course_Name']);
-
+           $studentas[]=$student;
+            $student_grade[]=$student[$course];
          }
+         CreateTable($studentas,$course,$student_grade,$coursy['Course_Name'],$coursy['Course_Code']);
+         unset($studentas);
 
 
 }else{
@@ -113,83 +124,139 @@ $coursy;
   //echo "<br>";
   $course = str_replace(' ', '', $nospace);
   $sql="SELECT FirstName,LastName,StudentID,$course FROM uwi ";
-  $sql_courseName="SELECT Course_Name From Courses where Course_Code LIKE '$value' ";
-  //echo $sql_courseName;
+  $sql_courseName="SELECT Course_Name,Course_Code From Courses where Course_Code LIKE '$value' ";
   $records=$db->doQuery($sql);
+  // $records2=$db->doQuery($sql);
+
   $course_name=$db->doQuery($sql_courseName);
   $coursy=$course_name->fetch_assoc();
-
+  // while($recs=$records2->fetch_assoc()){
+  //   echo $recs[$course];
+  // }
    while($student=$records->fetch_assoc()){
-     CreateTable($student,$coursy['Course_Name']);
-     //echo($coursy['Course_Name']);
+     $studentas[]=$student;
+      $student_grade[]=$student[$course];
+     //CreateTable($student,$coursy['Course_Name'],$student[$course],$course);
 
    }
+   CreateTable($studentas,$course,$student_grade,$coursy['Course_Name'],$coursy['Course_Code']);
+   unset($studentas);
+   //print_r($studentas);
+
+
 }
 }
 }
-    	//echo "<br>";
-//     	//echo $course;
-//     	//echo "<br>";
-//       $trydata=array();
-//       $sql="SELECT FirstName,LastName,StudentID,$course FROM uwi ";
-//       $sql_courseName="SELECT Course_Name From Courses where Course_Code LIKE '$value' ";
-//       //$sql_courseName="SELECT * From Courses ";
-//       //$sql "SELECT 's.FirstName','s.LastName','s.StudentID','c.Course_Name','c.Course_Code' FROM uwi AS s INNER JOIN Courses AS c" ;
+
+
+function countRate($pass_val,$fail_val){
+  $total=$pass_val+$fail_val;
+  $per_pass=$pass_val/$total*100;
+  $per_fail=$fail_val/$total*100;
+  $round_pass=round($per_pass);
+  $round_fail=round($per_fail);
+  $json_send=array();
+  $json_send=array(array("Name"=>"Not Completed","Students"=>$fail_val),array("Name"=>"Completed","Students"=>$pass_val));
+  // $json_send=array("Name"=>'Completed',"Students"=>$pass_val);
+
+
+
+  //array_push($json_send,$pass_val);
+  //array_push($json_send,$fail_val);
+//print_r($json_send);
+  echo "<H3 >Total Number of Students: $total </H3>";
+echo "<H3 id='pass'>Students passed: $pass_val </H3>";
+echo "<H3 id='pass'>Percentage of passsed students: $round_pass% </H3>";
+echo "<H3 id='fail'>Students to complete: $fail_val </H3>";
+echo "<H3 id='fail'>Percentage of students to complete: $round_fail% </H3>";
+$_SESSION['data'] = $json_send;
+
+}
+
+function CreateTable($tableData,$course,$student_grade,$course_name,$course_code){
+  $y=1;
+  $val=0;
+$pass_val=0;
+$fail_val=0;
+echo "<h3 align='center' > $course_name </h3>";
+echo "<h3 align='center' > $course_code </h3>";
+
+echo "<br>";
+  for($x=0;$x<$y;$x++){
+   echo "<table class='table table-bordered'>";
+    echo "<tr>";
+    echo "<th>First Name</th> ";
+    echo "<th>Last Name</th> ";
+    echo "<th>Student ID</th> ";
+    echo "<th>Grade</th> ";
+  echo "</tr>";
+}
+  // echo "<tr>";
+  foreach($tableData as $key1 => $row){
+    echo "<tr>";
+     echo "<td>$row[FirstName]</td> ";
+     echo "<td>$row[LastName]</td> ";
+     echo "<td>$row[StudentID]</td> ";
+     if($row[$course]=="NO"||$row[$course]=="no"){
+       echo "<td id='fail' >NO</td> ";
+       $fail_val++;
+     }
+    //  if($row[$course]==3){
+    //    echo "<td id='pass' >PASS</td> ";
+    //    $pass_val++;
+    //  }
+     if($row[$course]== null){
+       echo "<td id='fail'>NO</td> ";
+       $fail_val++;
+
+     }
+     if($row[$course]== "PASS"||$row[$course]== "pass" ){
+       echo "<td id='pass'>PASS</td> ";
+       $pass_val++;
+
+     }
+
+echo "</tr>";
+
+  }
+
+  // echo "</tr>";
+    echo "</table>";
+  countRate($pass_val,$fail_val);
+
+  }
+
+
+
+// function CreateTable($tableData,$course_name,$course_grade,$course_code){
+// //display data better than this
+//   //Remove the S and put the INFO in
 //
-//       //echo($sql);
-//        //echo("<br>");
-//       //echo("$sql_courseName<br>");
-//       $records=$db->doQuery($sql);
-//       //print_r($records);
-//       $course_name=$db->doQuery($sql_courseName);
-//       // echo("<br>CourseName below<br>");
-//       //print_r($course_name);
-//       $coursy=$course_name->fetch_assoc();
-//
-//        while($student=$records->fetch_assoc()){
-//         ///foreach($student as $key => $val){
-//          // for($i=0;$i<count($student);$i++){
-//            if($student[$course]==4||$student[$course]==6){
-//             $SID=$student['StudentID'];
-//
-//               if (!isset($data[$SID]))
-//               $data[$SID] = array();
-//               //$data[$SID]['Grade']=$student[$course];
-//               //$data[$SID]=$student[$course];
-//               array_push($trydata, $student[$course]);
-//           }else{
-//
+//   echo "<table class='table table-bordered'>";
+//   // echo '<tr>
+//   // <th>Word</th>
+//   // <th>Score</th>
+//   // </tr>';
+//   foreach ($tableData as $key1 => $row) {
+//     if($course_grade==$row && $course_grade==4){
+//       echo "<tr> <th>$course_code</th><td>PASS</td> </tr>";
+// break;
+//        }
+//        if($course_grade==$row && $course_grade==3){
+//          echo "<tr> <th>$course_code</th><td>PASS</td> </tr>";
+//    break;
 //           }
-//         CreateTable($student,$coursy['Course_Name']);
-//      }
-//
-//
-//
-//     }
-//     //echo json_encode($data);
-//     //echo json_encode($trydata);
-//
+//        if($course_grade==$row && $course_grade==NULL){
+//          echo "<tr> <th>$course_code</th><td>FAIL</td> </tr>";
+//    break;
+//           }
+//       echo "<tr> <th>$key1</th><td>$row</td> </tr>";
+//   }
+//   echo "<tr><th>$course_name</th></tr>";
+//   echo "</tbody>";
+//   echo '</table>';
 //
 // }
-
-
-function CreateTable($tableData,$course_name){
-//display data better than this
-  //Remove the S and put the INFO in
-
-  echo "<table class='table table-bordered'>";
-  // echo '<tr>
-  // <th>Word</th>
-  // <th>Score</th>
-  // </tr>';
-  foreach ($tableData as $key1 => $row) {
-      echo "<tr> <th>$key1</th><td>$row</td> </tr>";
-  }
-  echo "<tr><th>$course_name</th></tr>";
-  echo "</tbody>";
-  echo '</table>';
-
-}
 
 
 ?>

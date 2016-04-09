@@ -29,12 +29,7 @@ function changeChart(){
   var $chart=("#chart_sec");
   var dataSrc=$(".datasrc").filter(":checked").val();
   var url="";
-  // if(dataSrc==="php"){
-  //   url="api.php"
-  //   console.log(url);
-  // }
-//url="api.php";
-url="DisplayResults.php";
+url="api.php";
 console.log(url);
   $.get(url,function(data){
      // console.log(data);
@@ -45,33 +40,33 @@ console.log(url);
     }
 
 
-  });//had to add 'json' because PHP echos the json_encode check 'DisplayResults.php'
+  },'json');//had to add 'json' because PHP echos the json_encode check 'DisplayResults.php'
 
   }
 
   function drawPieChart($chart, data){
-    //console.log(data);
+    console.log(data);
     console.log("inside drawPieChart");
     var chartData=[];
-    for(var rec in data){
-  //data.forEach(function(rec){
-    console.log(rec.SID);
+    //for(var rec in data){
+  data.forEach(function(rec){
+    console.log(rec);
     var chartRec = {};
-    //chartRec.name = rec.StudentID; 
-    //chartRec.y = parseFloat(rec.course);
+    chartRec.name = rec.Name;
+    chartRec.y = parseFloat(rec.Students);
+    //chartData.push({ y: parseFloat(rec.Students), color: 'blue',name:rec.Name,color:'red' });
     chartData.push(chartRec);
     // chartRec.name = rec.Word;
     // chartRec.y = parseFloat(rec.Frequency);
     // chartData.push(chartRec);
-  }//);
-//console.log(chartData);
+  });
         $('#chart_container').highcharts({
        chart:{type:'pie'},
-       title:{text:'Pass rate'},
-       tooltip:{"pointFormat":'{series.name}: <b>{point.percentage:.0f}%</b>'},
+       title:{text:'Student Performance'},
+       tooltip:{"pointFormat":'<br>{series.name}:{point.percentage:.0f}%'},
        plotOptions: {},
        series: [{
-       name:'Grade',
+       name:'Percentage of Students',
          colorByPoint:true,
          data:chartData
        }]
@@ -84,22 +79,27 @@ console.log(url);
 function drawBarChart($chart,data){
   var categoriesData=[];
   var chartData={
-    name:'StudentID',
+    name:' Number of students',
     data:[]
   };
     //for (var rec in data) {
   data.forEach(function(rec){
-    categoriesData.push(rec.StudentID);
-    chartData.data.push(rec.StudentID);
+    categoriesData.push(rec.Name);
+    chartData.data.push(parseFloat(rec.Students));
+
   });
 
   $('#chart_container').highcharts({
     chart:{type:'bar'},
-    title:{text:'Pass Rate'},
+    title:{text:'Student Performance'},
     xAxis:{categories:categoriesData},
     yAxis:{"min":0},
     tooltip:{"valueSuffix":''},
-    plotOptions:{},
+    plotOptions: {
+      series: {
+                colorByPoint: true
+            }
+          },
     legend:{"layout":'vertical'},
     credits:{"enabled":false},
     series :[chartData]

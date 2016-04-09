@@ -39,7 +39,7 @@ $output='';
   <div id="navmenu">
 
   <ul>
-  <li class='active'><a href="">Student</a>
+  <li class='active'><a href="#">Student</a>
 
   <ul>
   <li><a href="staffhome.php">Student List</a></li>
@@ -51,7 +51,7 @@ $output='';
   </ul>
   </li>
 
-  <li><a href="">Course</a>
+  <li><a href="#">Course</a>
   <ul>
     <li><a href="allCourses.php">Course Listing</a></li>
   <li><a href="addCourse.php">Add Course</a></li>
@@ -60,7 +60,7 @@ $output='';
   </ul>
   </li>
 
-  <li><a href="Customquery.php">Custom Query</a>
+  <li><a href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -71,6 +71,8 @@ $output='';
   </div>
   </div>
 <H1 align="center">Search for a student</H1>
+<H3>the option of searching for a student in the system</H3>
+
 <form id="formy" action="findStudent.php" method="post"/>
   <input type="text" name="search" placeholder="Student ID Number"/>
   <input type="submit" name="submit" value= "Search" />
@@ -96,24 +98,14 @@ echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bo
   <th>First Name</th>
   <th>Last Name</th>
   <th>Student ID</th>
-  <th>1400</th>
   <th>1500</th>
 <th>1506</th>
-<th>1405</th>
 <th>1501</th>
 <th>1502</th>
-<th>1415</th>
 <th>1503</th>
 <th>1507</th>
-<th>1420</th>
-<th>1502_</th>
 <th>1504</th>
-<th>1410</th>
 <th>1505</th>
-<th>1507_</th>
-<th>1425</th>
-<th>1505_</th>
-<th>1506_</th>
 <th>2415</th>
 <th>2420</th>
 <th>2425</th>
@@ -153,24 +145,24 @@ while($row=$results->fetch_array()){
 echo "<td>".$row['FirstName']."</td>";
 echo "<td>".$row['LastName']."</td>";
 echo "<td>".$row['StudentID']."</td>";
-echo "<td>".$row['S1400']."</td>";
+// echo "<td>".$row['S1400']."</td>";
 echo "<td>".$row['S1500']."</td>";
 echo "<td>".$row['S1506']."</td>";
-echo "<td>".$row['S1405']."</td>";
+// echo "<td>".$row['S1405']."</td>";
 echo "<td>".$row['S1501']."</td>";
 echo "<td>".$row['S1502']."</td>";
-echo "<td>".$row['S1415']."</td>";
+// echo "<td>".$row['S1415']."</td>";
 echo "<td>".$row['S1503']."</td>";
 echo "<td>".$row['S1507']."</td>";
-echo "<td>".$row['S1420']."</td>";
-echo "<td>".$row['S1502_']."</td>";
+// echo "<td>".$row['S1420']."</td>";
+// echo "<td>".$row['S1502_']."</td>";
 echo "<td>".$row['S1504']."</td>";
-echo "<td>".$row['S1410']."</td>";
+// echo "<td>".$row['S1410']."</td>";
 echo "<td>".$row['S1505']."</td>";
-echo "<td>".$row['S1507_']."</td>";
-echo "<td>".$row['S1425']."</td>";
-echo "<td>".$row['S1505_']."</td>";
-echo "<td>".$row['S1506_']."</td>";
+// echo "<td>".$row['S1507_']."</td>";
+// echo "<td>".$row['S1425']."</td>";
+// echo "<td>".$row['S1505_']."</td>";
+// echo "<td>".$row['S1506_']."</td>";
 echo "<td>".$row['S2415']."</td>";
 echo "<td>".$row['S2420']."</td>";
 echo "<td>".$row['S2425']."</td>";

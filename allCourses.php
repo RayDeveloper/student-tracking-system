@@ -34,7 +34,7 @@ $records=$db->doQuery($sql);
 <div id="navmenu">
 
 <ul>
-<li><a href="">Student</a>
+<li><a href="#">Student</a>
 
 <ul>
 <li><a href="staffhome.php">Student List</a></li>
@@ -46,7 +46,7 @@ $records=$db->doQuery($sql);
 </ul>
 </li>
 
-<li class='active'><a href="">Course</a>
+<li class='active'><a href="#">Course</a>
 <ul>
 <li><a class='active' href="allCourses.php">Course Listing</a></li>
 <li><a  href="addCourse.php">Add Course</a></li>
@@ -55,7 +55,7 @@ $records=$db->doQuery($sql);
 </ul>
 </li>
 
-<li><a href="Customquery.php">Custom Query</a>
+<li><a href="Customquery.php">Custom Report</a>
 </li>
 
 <li><a href="logout.php">Log out</a>
@@ -66,11 +66,15 @@ $records=$db->doQuery($sql);
 </div>
 </div>
 <H1 align="center">Course Listing</H1>
-<table width="200" border="1" cellpadding="1" cellspacing="1" class="table table-bordered">
+<H3>a list showing all the courses in the system </H3>
+
+<table  class="table table-bordered">
   <tr>
 <th>Course Name</th>
 <th>Course Code</th>
 <th>Course Level</th>
+<th>Course Credits</th>
+
 
 <?php
 while($course=$records->fetch_assoc()){
@@ -79,6 +83,8 @@ echo "<tr>";
 echo "<td>".$course['Course_Name']."</td>";
 echo "<td>".$course['Course_Code']."</td>";
 echo "<td>".$course['Course_Level']."</td>";
+echo "<td>".$course['Course_Credits']."</td>";
+
 
 echo "</tr>";
 }//end while

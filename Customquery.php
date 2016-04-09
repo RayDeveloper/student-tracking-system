@@ -2,7 +2,7 @@
 <meta content="utf-8" http-equiv="encoding">
 
 <?php
-
+session_start();
 require_once("lib/database.php");
 $sqlString = '';
 $db = FALSE;
@@ -21,7 +21,7 @@ $db = new DatabaseAdapter("students");
 <html>
 
 <head>
-  <title>Custom Query</title>
+  <title>Custom Report</title>
   <meta charset="UTF-8">
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +36,7 @@ $db = new DatabaseAdapter("students");
   <div id="navmenu">
 
   <ul>
-  <li><a href="">Student</a>
+  <li><a href="#">Student</a>
 
   <ul>
   <li><a href="staffhome.php">Student List</a></li>
@@ -48,7 +48,7 @@ $db = new DatabaseAdapter("students");
   </ul>
   </li>
 
-  <li><a href="">Course</a>
+  <li><a href="#">Course</a>
   <ul>
     <li><a href="allCourses.php">Course Listing</a></li>
   <li><a href="addCourse.php">Add Course</a></li>
@@ -57,7 +57,7 @@ $db = new DatabaseAdapter("students");
   </ul>
   </li>
 
-  <li><a class='active' href="Customquery.php">Custom Query</a>
+  <li><a class='active' href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -67,7 +67,8 @@ $db = new DatabaseAdapter("students");
   </ul>
   </div>
   </div>
-<H1 align="center">Custom Query</H1>
+<H1 align="center">Custom Report</H1>
+<H3>The option of creating a custom query for a particular course(s). </H3>
 
 <form action="DisplayCourses.php" align="center" method="POST">
 

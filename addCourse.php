@@ -23,7 +23,7 @@ $db = new DatabaseAdapter("students");
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <!-- <script src="script.js"></script> -->
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
@@ -54,7 +54,7 @@ $db = new DatabaseAdapter("students");
 </ul>
 </li>
 
-<li><a href="Customquery.php">Custom Query</a>
+<li><a href="Customquery.php">Custom Report</a>
 </li>
 
 <li><a href="logout.php">Log out</a>
@@ -72,50 +72,66 @@ $db = new DatabaseAdapter("students");
 
 <!-- </div> -->
 <H1 align="center">Add a Course</H1>
+<H3>Add a Course to the system.</H3>
 
 <form action="addCourse.php" align="center" method="post">
   Course Name: <input type="text" required name="coursename"><br>
   Course Code: <input type="text" required name="coursecode"><br>
-
    <label >Choose Course Level</label></br>
   <input type="radio" name="level" required value="Level 1">Level 1<br>
   <input type="radio" name="level" value="Level 2" >Level 2<br>
   <input type="radio" name="level" value="Level 3" >Level 3<br>
   <input type="radio" name="level" value="Elective" >Elective<br>
   <input type="radio" name="level" value="Foundation Course" >Foundation Course<br>
-
+  <br>
   <input type="submit" name="submit" value="Add Course">
 </form>
 
 
 </body>
 <?php
-//keeps taking in blank values
+//keeps taking in blank values..update solved
 if(isset($_POST['submit'])){
   $_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';
   $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
-
   $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
 
-  $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level) Values ('$_CourseName','$_CourseCode','$_CourseLevel')";
+if($_CourseLevel=="Level 1")
+$_CourseCredits="3";
+
+if($_CourseLevel=="Level 2")
+$_CourseCredits="4";
+
+if($_CourseLevel=="Level 3")
+$_CourseCredits="4";
+
+if($_CourseLevel=="Foundation Course")
+$_CourseCredits="3";
+
+if($_CourseLevel=="Elective")
+$_CourseCredits="4";
+
+
+
+  $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level,Course_Credits) Values ('$_CourseName','$_CourseCode','$_CourseLevel','$_CourseCredits')";
   $db->doQuery($sql);
   $new_code= str_replace("INFO ","S",$_CourseCode);
   $place_code= str_replace("S","",$new_code);
   //echo "new code: $new_code<br>";
   //echo "place code: $place_code<br>";
-  if(strstr($place_code, '1')){
-    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1425";
-    $db->doQuery($sql2);
-  }else if(strstr($place_code, '2')){
-    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S2410";
-    $db->doQuery($sql2);
-  }else if(strstr($place_code, '3')){
-    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S3510";
-    $db->doQuery($sql2);
-  }else{
-    $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1105";
-    $db->doQuery($sql2);
-  }
+  // if(strstr($place_code, '1')){
+  //   $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1425";
+  //   $db->doQuery($sql2);
+  // }else if(strstr($place_code, '2')){
+  //   $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S2410";
+  //   $db->doQuery($sql2);
+  // }else if(strstr($place_code, '3')){
+  //   $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S3510";
+  //   $db->doQuery($sql2);
+  // }else{
+  //   $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1105";
+  //   $db->doQuery($sql2);
+  // }
 
 }
 

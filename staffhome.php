@@ -111,7 +111,7 @@ if(mysql_query($sql,$con)){
   </ul>
   </li>
 
-  <li><a href="Customquery.php">Custom Query</a>
+  <li><a href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -122,29 +122,35 @@ if(mysql_query($sql,$con)){
   </div>
   </div>
 <H1 align="center">Student listing</H1>
-<table width="200" border="1" cellpadding="1" cellspacing="1" class="table table-bordered">
+<H3>student listing displays the students that are currently in the system.</H3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table class="table table-bordered">
   <tr>
 <th>First Name</th>
 <th>Last Name</th>
 <th>ID Number</th>
-<th>1400</th>
+<!-- <th>1400</th> -->
 <th>1500</th>
 <th>1506</th>
-<th>1405</th>
+<!-- <th>1405</th> -->
 <th>1501</th>
 <th>1502</th>
-<th>1415</th>
+<!-- <th>1415</th> -->
 <th>1503</th>
 <th>1507</th>
-<th>1420</th>
-<th>1502_</th>
+<!-- <th>1420</th> -->
+<!-- <th>1502_</th> -->
 <th>1504</th>
-<th>1410</th>
+<!-- <th>1410</th> -->
 <th>1505</th>
-<th>1507_</th>
-<th>1425</th>
-<th>1505_</th>
-<th>1506_</th>
+<!-- <th>1507_</th> -->
+<!-- <th>1425</th> -->
+<!-- <th>1505_</th> -->
+<!-- <th>1506_</th> -->
 <th>2415</th>
 <th>2420</th>
 <th>2425</th>
@@ -187,24 +193,24 @@ echo "<tr>";
 echo "<td>".$employee['FirstName']."</td>";
 echo "<td>".$employee['LastName']."</td>";
 echo "<td>".$employee['StudentID']."</td>";
-echo "<td>".$employee['S1400']."</td>";
+// echo "<td>".$employee['S1400']."</td>";
 echo "<td>".$employee['S1500']."</td>";
 echo "<td>".$employee['S1506']."</td>";
-echo "<td>".$employee['S1405']."</td>";
+// echo "<td>".$employee['S1405']."</td>";
 echo "<td>".$employee['S1501']."</td>";
 echo "<td>".$employee['S1502']."</td>";
-echo "<td>".$employee['S1415']."</td>";
+// echo "<td>".$employee['S1415']."</td>";
 echo "<td>".$employee['S1503']."</td>";
 echo "<td>".$employee['S1507']."</td>";
-echo "<td>".$employee['S1420']."</td>";
-echo "<td>".$employee['S1502_']."</td>";
+// echo "<td>".$employee['S1420']."</td>";
+// echo "<td>".$employee['S1502_']."</td>";
 echo "<td>".$employee['S1504']."</td>";
-echo "<td>".$employee['S1410']."</td>";
+// echo "<td>".$employee['S1410']."</td>";
 echo "<td>".$employee['S1505']."</td>";
-echo "<td>".$employee['S1507_']."</td>";
-echo "<td>".$employee['S1425']."</td>";
-echo "<td>".$employee['S1505_']."</td>";
-echo "<td>".$employee['S1506_']."</td>";
+// echo "<td>".$employee['S1507_']."</td>";
+// echo "<td>".$employee['S1425']."</td>";
+// echo "<td>".$employee['S1505_']."</td>";
+// echo "<td>".$employee['S1506_']."</td>";
 echo "<td>".$employee['S2415']."</td>";
 echo "<td>".$employee['S2420']."</td>";
 echo "<td>".$employee['S2425']."</td>";

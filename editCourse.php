@@ -46,7 +46,7 @@ $db->doQuery($UpdateQuery);
   <div id="navmenu">
 
   <ul>
-  <li ><a href="">Student</a>
+  <li ><a href="#">Student</a>
 
   <ul>
   <li><a href="staffhome.php">Student List</a></li>
@@ -57,7 +57,7 @@ $db->doQuery($UpdateQuery);
   </ul>
   </li>
 
-  <li class='active'><a href="">Course</a>
+  <li class='active'><a href="#">Course</a>
   <ul>
     <li><a href="allCourses.php">Course Listing</a></li>
     <li><a href="addCourse.php">Add Course</a></li>
@@ -66,7 +66,7 @@ $db->doQuery($UpdateQuery);
   </ul>
   </li>
 
-  <li><a href="Customquery.php">Custom Query</a>
+  <li><a href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -77,6 +77,8 @@ $db->doQuery($UpdateQuery);
   </div>
   </div>
   <H1 align="center">Edit Course</H1>
+  <H3>the option to edit a course in the system</H3>
+
   <form id="formy" action="editCourse.php" method="post"/>
     <input type="text" name="search" required placeholder="Course Code"/>
     <input type="submit" name="submit" value= "Search" />
@@ -105,6 +107,8 @@ $db->doQuery($UpdateQuery);
     <th>Course Name</th>
     <th>Course Code</th>
     <th>Course Level</th>
+    <th>Course Credits</th>
+
     </tr>";
 while($row=$results->fetch_array()){
   echo "<form action=editCourse.php method=post>";
@@ -112,6 +116,8 @@ while($row=$results->fetch_array()){
   echo "<td> <input type='text' name='course_name' value='$row[Course_Name]'  </td>";
   echo "<td> <input type='text' name='course_code' value='$row[Course_Code]'  </td>";
   echo "<td> <input type='text' name='course_level' value='$row[Course_Level]'  </td>";
+  echo "<td> <input type='text' name='course_level' value='$row[Course_Credits]'  </td>";
+
   echo "</tr>";
   echo "<td> <input type=hidden name=hidden value='$row[Course_Code]'  </td>";
   echo "<td>" . "<input type=submit name='update' value=update"  .  " </td>";

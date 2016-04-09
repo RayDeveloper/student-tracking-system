@@ -17,8 +17,8 @@ if(isset($_POST['coursecode'])){
   $db->doQuery($Deletequery);
   $new_code= str_replace("INFO","S",$_POST['coursecode']);
 
-  $sql3= "ALTER TABLE uwi DROP COLUMN $new_code";
-  $db->doQuery($sql3);
+  // $sql3= "ALTER TABLE uwi DROP COLUMN $new_code";
+  // $db->doQuery($sql3);
 
 }
 ?>
@@ -42,7 +42,7 @@ if(isset($_POST['coursecode'])){
   <div id="navmenu">
 
   <ul>
-  <li><a href="">Student</a>
+  <li><a href="#">Student</a>
 
   <ul>
   <li><a href="staffhome.php">Student List</a></li>
@@ -54,7 +54,7 @@ if(isset($_POST['coursecode'])){
   </ul>
   </li>
 
-  <li  class='active'><a href="">Course</a>
+  <li  class='active'><a href="#">Course</a>
   <ul>
     <li><a href="allCourses.php">Course Listing</a></li>
   <li><a href="addCourse.php">Add Course</a></li>
@@ -63,7 +63,7 @@ if(isset($_POST['coursecode'])){
   </ul>
   </li>
 
-  <li><a href="Customquery.php">Custom Query</a>
+  <li><a href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -74,6 +74,7 @@ if(isset($_POST['coursecode'])){
   </div>
   </div>
 <H1 align="center">Delete A Course</H1>
+<H3>Delete a course from the system</H3>
 
 <form action="DeleteCourse.php" align="center" method="post">
   <!-- Course Name: <input type="text" name="coursename"><br> -->
@@ -93,14 +94,17 @@ if(isset($_POST['coursecode'])){
 <th>Course Name</th>
 <th>Course Code</th>
 <th>Course Level</th>
+<th>Course Credits</th>
+
 
 <?php
 while($course=$records->fetch_assoc()){
-
 echo "<tr>";
 echo "<td>".$course['Course_Name']."</td>";
 echo "<td>".$course['Course_Code']."</td>";
 echo "<td>".$course['Course_Level']."</td>";
+echo "<td>".$course['Course_Credits']."</td>";
+
 
 echo "</tr>";
 }//end while

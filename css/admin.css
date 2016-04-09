@@ -174,3 +174,10 @@ width:250px;
 	background:#595959;
 	color:#FFFFFF;
 }
+
+#pass{
+   color:green;
+}
+#fail{
+   color:red;
+}

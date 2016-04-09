@@ -2,7 +2,6 @@
 <meta content="utf-8" http-equiv="encoding">
 
 <?php
-
 require_once("lib/database.php");
 $sqlString = '';
 $db = FALSE;
@@ -37,7 +36,7 @@ $db = new DatabaseAdapter("students");
   <div id="navmenu">
 
   <ul>
-  <li><a href="">Student</a>
+  <li><a href="#">Student</a>
 
   <ul>
   <li><a href="staffhome.php">Student List</a></li>
@@ -49,7 +48,7 @@ $db = new DatabaseAdapter("students");
   </ul>
   </li>
 
-  <li ><a href="">Course</a>
+  <li ><a href="#">Course</a>
   <ul>
     <li><a href="allCourses.php">Course Listing</a></li>
   <li><a href="addCourse.php">Add Course</a></li>
@@ -58,7 +57,7 @@ $db = new DatabaseAdapter("students");
   </ul>
   </li>
 
-  <li class='active'><a href="Customquery.php">Custom Query</a>
+  <li class='active'><a href="Customquery.php">Custom Report</a>
   </li>
 
   <li><a href="logout.php">Log out</a>
@@ -68,7 +67,9 @@ $db = new DatabaseAdapter("students");
   </ul>
   </div>
   </div>
-<H1 align="center">Custom Query</H1>
+<H1 align="center">Custom Report</H1>
+<H3>Choose a course(s) to query.</H3>
+
 <?php
 //$level = isset($_POST['Course_Level']) ? $_POST['Course_Level'] : '';
 if(isset($_POST['Course_Level'])) {
@@ -119,7 +120,6 @@ $course=$course['Course_Code'];
 echo "<input type='checkbox'  name =course[] value='$course'>$course <br>";
 }
  echo" <input type='submit' name='submit' value='Display Results'>";
-
 echo "</form>";
 
 
@@ -144,6 +144,7 @@ $course=$course['Course_Code'];
 echo "<input type='checkbox'  name =course[] value='$course'> $course <br>";
 }
  echo" <input type='submit' name='submit'  value='Display Results'>";
+
 
 echo "</form>";
 
