@@ -15,8 +15,11 @@ $employee=FALSE;
 $db = new DatabaseAdapter("students");
 
 if(isset($_POST['update'])){
-$UpdateQuery="UPDATE courses SET Course_Name= '$_POST[course_name]',
-  Course_Code='$_POST[course_code]',
+  $coursename_sanitize=sanitize($_POST['course_name']);
+  $coursecode_sanitize=sanitize($_POST['course_code']);
+
+$UpdateQuery="UPDATE courses SET Course_Name= '$coursename_sanitize',
+  Course_Code='$coursecode_sanitize',
   Course_Level='$_POST[course_level]' WHERE Course_Code='$_POST[hidden]'";
 
 $db->doQuery($UpdateQuery);
@@ -24,7 +27,34 @@ $db->doQuery($UpdateQuery);
 
 }
 
+function sanitize($input) {
+    if (is_array($input)) {
+        foreach($input as $var=>$val) {
+            $output[$var] = sanitize($val);
+        }
+    }
+    else {
+        if (get_magic_quotes_gpc()) {
+            $input = stripslashes($input);
+        }
+        $input  = cleanInput($input);
+        $output = mysql_real_escape_string($input);
+    }
+    return $output;
+}
 
+function cleanInput($input) {
+
+  $search = array(
+    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+  );
+
+    $output = preg_replace($search, '', $input);
+    return $output;
+  }
 ?>
 <!doctype html>
 <html>
@@ -91,7 +121,7 @@ $db->doQuery($UpdateQuery);
 
   global $searchq;
     if(isset($_POST['search'])){
-  $searchq=$_POST['search'];
+  $searchq=sanitize($_POST['search']);
 
   //$searchq=preg_replace(("#[^0-9a-z]#i" ,"", $searchq);
   $query="SELECT * FROM courses WHERE Course_Code like '$searchq' ";
@@ -116,7 +146,7 @@ while($row=$results->fetch_array()){
   echo "<td> <input type='text' name='course_name' value='$row[Course_Name]'  </td>";
   echo "<td> <input type='text' name='course_code' value='$row[Course_Code]'  </td>";
   echo "<td> <input type='text' name='course_level' value='$row[Course_Level]'  </td>";
-  echo "<td> <input type='text' name='course_level' value='$row[Course_Credits]'  </td>";
+  echo "<td> <input type='text' name='course_credits' value='$row[Course_Credits]'  </td>";
 
   echo "</tr>";
   echo "<td> <input type=hidden name=hidden value='$row[Course_Code]'  </td>";
@@ -127,6 +157,7 @@ while($row=$results->fetch_array()){
 echo"</table>";
 
 }
+
 }
 
 ?>

@@ -96,6 +96,11 @@ if(isset($_POST['submit'])){
   $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
   $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
 
+$_CourseName_sanitzied=sanitize($_CourseName);
+$_CourseCode_sanitzied=sanitize($_CourseCode);
+
+
+
 if($_CourseLevel=="Level 1")
 $_CourseCredits="3";
 
@@ -113,7 +118,7 @@ $_CourseCredits="4";
 
 
 
-  $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level,Course_Credits) Values ('$_CourseName','$_CourseCode','$_CourseLevel','$_CourseCredits')";
+  $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level,Course_Credits) Values ('$_CourseName_sanitzied','$_CourseCode_sanitzied','$_CourseLevel','$_CourseCredits')";
   $db->doQuery($sql);
   $new_code= str_replace("INFO ","S",$_CourseCode);
   $place_code= str_replace("S","",$new_code);
@@ -134,6 +139,34 @@ $_CourseCredits="4";
   // }
 
 }
+function sanitize($input) {
+    if (is_array($input)) {
+        foreach($input as $var=>$val) {
+            $output[$var] = sanitize($val);
+        }
+    }
+    else {
+        if (get_magic_quotes_gpc()) {
+            $input = stripslashes($input);
+        }
+        $input  = cleanInput($input);
+        $output = mysql_real_escape_string($input);
+    }
+    return $output;
+}
+
+function cleanInput($input) {
+
+  $search = array(
+    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+  );
+
+    $output = preg_replace($search, '', $input);
+    return $output;
+  }
 
 
 

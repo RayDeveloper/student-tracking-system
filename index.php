@@ -11,10 +11,18 @@ $employee=FALSE;
 $db = new DatabaseAdapter("loginusers");
 
 
-if(isset($_POST['username'])){
+if(isset($_POST['submit'])){
+
+
+
+
   $username=$_POST['username'];
+  $clean_username=sanitize($username);
   $password=$_POST['password'];
-$sql="SELECT *FROM users WHERE Username='".$username."'AND Password='".$password."' LIMIT 1";
+  $hased_pass=sha1($password);
+$sql="SELECT *FROM users WHERE Username='".$clean_username."'AND Password='".$hased_pass."' LIMIT 1";
+
+
 $results=$db->doQuery($sql);
 $count=($results);
 //$admin_check=mysql_fetch_assoc($res);
@@ -36,6 +44,35 @@ $_SESSION['sess_user']=$username;
 }
 
 }
+function sanitize($input) {
+    if (is_array($input)) {
+        foreach($input as $var=>$val) {
+            $output[$var] = sanitize($val);
+        }
+    }
+    else {
+        if (get_magic_quotes_gpc()) {
+            $input = stripslashes($input);
+        }
+        $input  = cleanInput($input);
+        $output = mysql_real_escape_string($input);
+    }
+    return $output;
+}
+
+function cleanInput($input) {
+
+  $search = array(
+    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+  );
+
+    $output = preg_replace($search, '', $input);
+    return $output;
+  }
+
  function isAdmin($test){
   if($test=='admin'){
       header('Location: staffhome.php');

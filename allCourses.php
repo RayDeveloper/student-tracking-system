@@ -66,7 +66,7 @@ $records=$db->doQuery($sql);
 </div>
 </div>
 <H1 align="center">Course Listing</H1>
-<H3>a list showing all the courses in the system </H3>
+<H3>A list showing all the courses in the system </H3>
 
 <table  class="table table-bordered">
   <tr>

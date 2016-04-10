@@ -13,7 +13,8 @@ $sql="SELECT * FROM Courses ";
 $records=$db->doQuery($sql);
 
 if(isset($_POST['coursecode'])){
-  $Deletequery =("DELETE FROM Courses WHERE  Course_Code='$_POST[coursecode]' ");
+  $courseCode_sanitize=sanitize($_POST['coursecode']);
+  $Deletequery =("DELETE FROM Courses WHERE  Course_Code='$courseCode_sanitize' ");
   $db->doQuery($Deletequery);
   $new_code= str_replace("INFO","S",$_POST['coursecode']);
 
@@ -21,6 +22,34 @@ if(isset($_POST['coursecode'])){
   // $db->doQuery($sql3);
 
 }
+function sanitize($input) {
+    if (is_array($input)) {
+        foreach($input as $var=>$val) {
+            $output[$var] = sanitize($val);
+        }
+    }
+    else {
+        if (get_magic_quotes_gpc()) {
+            $input = stripslashes($input);
+        }
+        $input  = cleanInput($input);
+        $output = mysql_real_escape_string($input);
+    }
+    return $output;
+}
+
+function cleanInput($input) {
+
+  $search = array(
+    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+  );
+
+    $output = preg_replace($search, '', $input);
+    return $output;
+  }
 ?>
 
 <!doctype html>
@@ -112,7 +141,7 @@ echo "</tr>";
 
 ?>
 </table>
-</body>
+<!-- </body> -->
 <?php
 
  //$_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';

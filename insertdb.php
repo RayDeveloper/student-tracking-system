@@ -15,60 +15,60 @@ $results=$db->doQuery($sql);
 //$con=mysql_connect("localhost","root","usbw") or die("Could not connect");
 //mysql_select_db("students") or die("Could not find db!");
 
-$fname=$_POST['fname'];
-$lname=$_POST['lname'];
-$ID=$_POST['ID'];
+$fname=sanitize($_POST['fname']);
+$lname=sanitize($_POST['lname']);
+$ID=sanitize($_POST['ID']);
 // $_1400=$_POST['1400'];
-$_1500=$_POST['1500'];
-$_1506=$_POST['1506'];
+$_1500=sanitize($_POST['1500']);
+$_1506=sanitize($_POST['1506']);
 // $_1405=$_POST['1405'];
-$_1501=$_POST['1501'];
-$_1502=$_POST['1502'];
+$_1501=sanitize($_POST['1501']);
+$_1502=sanitize($_POST['1502']);
 // $_1415=$_POST['1415'];
-$_1503=$_POST['1503'];
-$_1507=$_POST['1507'];
+$_1503=sanitize($_POST['1503']);
+$_1507=sanitize($_POST['1507']);
 // $_1420=$_POST['1420'];
 // $_1502_=$_POST['1502_'];
-$_1504=$_POST['1504'];
+$_1504=sanitize($_POST['1504']);
 // $_1410=$_POST['1410'];
-$_1505=$_POST['1505'];
+$_1505=sanitize($_POST['1505']);
 // $_1507_=$_POST['1507_'];
 // $_1425=$_POST['1425'];
 // $_1505_=$_POST['1505_'];
 // $_1506_=$_POST['1506_'];
-$_2415=$_POST['2415'];
-$_2420=$_POST['2420'];
-$_2425=$_POST['2425'];
-$_2430=$_POST['2430'];
-$_2400=$_POST['2400'];
-$_2405=$_POST['2405'];
-$_2410=$_POST['2410'];
-$_3400=$_POST['3400'];
-$_3405=$_POST['3405'];
-$_2500=$_POST['2500'];
-$_3415=$_POST['3415'];
-$_3440=$_POST['3440'];
-$_3410=$_POST['3410'];
-$_3420=$_POST['3420'];
-$_3435=$_POST['3435'];
-$_3490=$_POST['3490'];
-$_3425=$_POST['3425'];
-$_3430=$_POST['3430'];
-$_3500=$_POST['3500'];
-$_3520=$_POST['3520'];
-$_3510=$_POST['3510'];
-$_1101=$_POST['1101'];
-$_1301=$_POST['1301'];
-$_1102=$_POST['1102'];
-$_1105=$_POST['1105'];
-$L1_Core=$_POST['L1_Core'];
-$L1_Electives=$_POST['L1_Electives'];
-$ADV_Core=$_POST['ADV_Core'];
-$ADV_Electives=$_POST['ADV_Electives'];
-$FOUN=$_POST['FOUN'];
-$Total_Credits=$_POST['Total_Credits'];
-$Additional_Courses=$_POST['Additional_Courses'];
-$Completed=$_POST['Completed'];
+$_2415=sanitize($_POST['2415']);
+$_2420=sanitize($_POST['2420']);
+$_2425=sanitize($_POST['2425']);
+$_2430=sanitize($_POST['2430']);
+$_2400=sanitize($_POST['2400']);
+$_2405=sanitize($_POST['2405']);
+$_2410=sanitize($_POST['2410']);
+$_3400=sanitize($_POST['3400']);
+$_3405=sanitize($_POST['3405']);
+$_2500=sanitize($_POST['2500']);
+$_3415=sanitize($_POST['3415']);
+$_3440=sanitize($_POST['3440']);
+$_3410=sanitize($_POST['3410']);
+$_3420=sanitize($_POST['3420']);
+$_3435=sanitize($_POST['3435']);
+$_3490=sanitize($_POST['3490']);
+$_3425=sanitize($_POST['3425']);
+$_3430=sanitize($_POST['3430']);
+$_3500=sanitize($_POST['3500']);
+$_3520=sanitize($_POST['3520']);
+$_3510=sanitize($_POST['3510']);
+$_1101=sanitize($_POST['1101']);
+$_1301=sanitize($_POST['1301']);
+$_1102=sanitize($_POST['1102']);
+$_1105=sanitize($_POST['1105']);
+$L1_Core=sanitize($_POST['L1_Core']);
+$L1_Electives=sanitize($_POST['L1_Electives']);
+$ADV_Core=sanitize($_POST['ADV_Core']);
+$ADV_Electives=sanitize($_POST['ADV_Electives']);
+$FOUN=sanitize($_POST['FOUN']);
+$Total_Credits=sanitize($_POST['Total_Credits']);
+$Additional_Courses=sanitize($_POST['Additional_Courses']);
+$Completed=sanitize($_POST['Completed']);
 
 //echo $L1_Core;
 //echo $L1_Electives;
@@ -96,5 +96,33 @@ if($results){
 }
 //mysql_close($con);
 
+function sanitize($input) {
+    if (is_array($input)) {
+        foreach($input as $var=>$val) {
+            $output[$var] = sanitize($val);
+        }
+    }
+    else {
+        if (get_magic_quotes_gpc()) {
+            $input = stripslashes($input);
+        }
+        $input  = cleanInput($input);
+        $output = mysql_real_escape_string($input);
+    }
+    return $output;
+}
+
+function cleanInput($input) {
+
+  $search = array(
+    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
+    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
+    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
+    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
+  );
+
+    $output = preg_replace($search, '', $input);
+    return $output;
+  }
 
 ?>
