@@ -18,9 +18,15 @@ $db = new DatabaseAdapter("students");
 
 if(isset($_POST['search'])){
   $search_sanitize=sanitize($_POST['search']);
+if(strlen($search_sanitize)< 9){
+  echo "<script type='text/javascript'>alert('The ID number you entered is too short.');</script>";
+
+}else if(strlen($search_sanitize)>9){
+  echo "<script type='text/javascript'>alert('The ID number you entered is too long');</script>";
+}else{
   $Deletequery =("DELETE FROM uwi WHERE  StudentID='$search_sanitize' ");
   $db->doQuery($Deletequery);
-
+}
  // mysql_query($Deletequery,$con);
 };
 $sql="SELECT * FROM uwi ";
@@ -170,7 +176,6 @@ function cleanInput($input) {
 </tr>
 <?php
 while($employee=$records->fetch_assoc()){
-
 echo "<tr>";
 echo "<td>".$employee['FirstName']."</td>";
 echo "<td>".$employee['LastName']."</td>";
@@ -233,6 +238,8 @@ echo "</tr>";
 
 
 }//end while
+
+
 ?>
 
 </table>

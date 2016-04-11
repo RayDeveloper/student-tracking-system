@@ -92,13 +92,13 @@ $db = new DatabaseAdapter("students");
 <?php
 //keeps taking in blank values..update solved
 if(isset($_POST['submit'])){
+
   $_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';
   $_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
   $_CourseLevel = isset($_POST['level']) ? $_POST['level'] : '';
 
 $_CourseName_sanitzied=sanitize($_CourseName);
 $_CourseCode_sanitzied=sanitize($_CourseCode);
-
 
 
 if($_CourseLevel=="Level 1")

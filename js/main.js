@@ -1,6 +1,36 @@
 console.log("Connected to App");
 
+// function IDhelp(){
+//   var value = document.getElementById("ID").value;
+//
+//   if(value.length!=9){
+//     alert("The ID number you entered is too short.");
+//     location.reload;
+//   }
+// }
+function validateForm(){
+  var value = document.getElementById("ID").value;
+  if(value.length < 9){
+    alert("The ID number you entered is too short.");
+    //location.reload;
+    return false;
+  }else if(value.length > 9){
+  alert("The ID number you entered is too long.");
+  //location.reload;
+  return false;
+}else{
+  return true;
+}
 
+}
+
+function checked(){
+  var value = document.getElementById("check").value;
+  if(value !="PASS" || value != "NO"){
+  alert("Enter on PASS or NO. :"+value);
+}
+
+}
 
 function startReportPageSetup(){
     console.log("startReportPageSetup");

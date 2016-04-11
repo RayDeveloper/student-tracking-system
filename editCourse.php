@@ -18,6 +18,7 @@ if(isset($_POST['update'])){
   $coursename_sanitize=sanitize($_POST['course_name']);
   $coursecode_sanitize=sanitize($_POST['course_code']);
 
+
 $UpdateQuery="UPDATE courses SET Course_Name= '$coursename_sanitize',
   Course_Code='$coursecode_sanitize',
   Course_Level='$_POST[course_level]' WHERE Course_Code='$_POST[hidden]'";

@@ -187,8 +187,9 @@ if(mysql_query($sql,$con)){
 
 </tr>
 <?php
+$total=0;
 while($employee=$results->fetch_assoc()){
-
+$total++;
 echo "<tr>";
 echo "<td>".$employee['FirstName']."</td>";
 echo "<td>".$employee['LastName']."</td>";
@@ -251,7 +252,7 @@ echo "</tr>";
 
 
 }//end while
-
+echo "<H3> total number of students: $total </H3>";
 ?>
 </table>
 

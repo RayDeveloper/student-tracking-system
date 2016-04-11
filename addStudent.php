@@ -9,6 +9,8 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="js/main.js"></script>
+
 
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -57,11 +59,11 @@
 
 
 
-<form action="insertdb.php" align="center" method="post">
+<form action="insertdb.php" onsubmit="return validateForm();" align="center" method="post">
   First name: <input type="text" required name="fname"/><br>
   Last name: <input type="text" required name="lname"/><br>
-  Student ID: <input type="text" required name="ID"/><br>
-  1500:<input type="text" name="1500"/><br>
+  Student ID: <input type="text" id="ID" required name="ID"/><br>
+  1500:<input type="text" id="check" onchange="checked();" name="1500"/><br>
   1506:<input type="text"  name="1506"/><br>
   1501:<input type="text" name="1501"/><br>
   1502:<input type="text" name="1502"/><br>
@@ -103,11 +105,10 @@
   Additional Courses: <input type="text" name="Additional_Courses"/><br>
   Completed: <input type="text" name="Completed"/><br>
 
-  <input style="position: relative; left:300px; bottom:900px; height:100px; width:100px" type="submit" name="submit" value="Add Student">
+  <input onClick="checked" style="position: relative; left:300px; bottom:900px; height:100px; width:100px" type="submit" name="submit" value="Add Student">
 
 </form>
 
 </body>
-
 
 </html>

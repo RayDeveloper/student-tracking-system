@@ -83,6 +83,11 @@ $output='';
 
 if(isset($_POST['search'])){
 $searchq=sanitize($_POST['search']);
+if(strlen($searchq)<9){
+  echo "<script type='text/javascript'>alert('The ID number you entered is to0 short.');</script>";
+}else if (strlen($searchq)>9){
+  echo "<script type='text/javascript'>alert('The ID number you entered is too long.');</script>";
+}else{
 //$searchq=preg_replace(("#[^0-9a-z]#i" ,"", $searchq);
 $query="SELECT * FROM uwi WHERE StudentID like '".$searchq."' ";
 $results=$db->doQuery($query);
@@ -204,6 +209,7 @@ echo "</tr>";
   //$id=$row['StudentID'];
  // $is=$row['1400'];
  }//end if
+ }
 }//end isset
 function sanitize($input) {
     if (is_array($input)) {

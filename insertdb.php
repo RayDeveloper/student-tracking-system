@@ -1,4 +1,5 @@
 <?php
+
 require_once("lib/database.php");
 $sqlString = '';
 $db = FALSE;
@@ -11,13 +12,12 @@ $employee=FALSE;
 $db = new DatabaseAdapter("students");
 $sql="SELECT * FROM uwi ";
 $results=$db->doQuery($sql);
-
 //$con=mysql_connect("localhost","root","usbw") or die("Could not connect");
 //mysql_select_db("students") or die("Could not find db!");
 
 $fname=sanitize($_POST['fname']);
 $lname=sanitize($_POST['lname']);
-$ID=sanitize($_POST['ID']);
+$ID=IDsanitize($_POST['ID']);
 // $_1400=$_POST['1400'];
 $_1500=sanitize($_POST['1500']);
 $_1506=sanitize($_POST['1506']);
@@ -83,6 +83,7 @@ $_1400=$_POST['1400'];
 
 $sql="INSERT INTO uwi (FirstName,LastName,StudentID,S1500,S1506,S1501,S1502,S1503,S1507,S1504,S1505,S2415,S2420,S2425,S2430,S2400,S2405,S2410,S3400,S3405,S2500,S3415,S3440,S3410,S3420,S3435,S3490,S3425,S3430,S3500,S3520,S3510,S1101,S1301,S1102,S1105,L1_Core,L1_Electives,ADV_Core,ADV_Electives,FOUN,Total_Credits,Additional_Courses,Completed) VALUES ('$fname','$lname','$ID','$_1500','$_1506','$_1501','$_1502','$_1503','$_1507','$_1504','$_1505','$_2415','$_2420','$_2425','$_2430','$_2400','$_2405','$_2410','$_3400','$_3405','$_2500','$_3415','$_3440','$_3410','$_3420','$_3435','$_3490','$_3425','$_3430','$_3500','$_3520','$_3510','$_1101','$_1301','$_1102','$_1105','$L1_Core','$L1_Electives','$ADV_Core','$ADV_Electives','$FOUN','$Total_Credits','$Additional_Courses','$Completed')";
 $results=$db->doQuery($sql);
+
 //echo $results;
 //$sql="INSERT INTO uwi (FirstName,LastName,StudentID,S1400,S1500,S1506,S1405,S1501,S1502,S1415,S1503,S1507,S1420,S1502_,S1504,S1410,S1505,S1507_,S1425,S1505_,S1506_,S2415,S2420,S2425,S2430,S2400,S2405,S2410,S3400,S3405,S2500,S3415,S3440,S3410,S3420,S3435,S3490,S3425,S3430,S3500,S3520,S3510,S1101,S1301,S1102,S1105,L1_Core,L1_Electives,ADV_Core_48,ADV_Electives,FOUN_9,Total Credits,Additional Courses,Completed)
 //VALUES ('$fname','$lname','$ID','$_1400','$_1500','$_1506','$_1405','$_1501','$_1506','$_1502','$_1415','$_1503','$_1507','$_1420','$_1502_','$_1504','$_1410','$_1505','$_1507_','$_1425','$_1505_','$_1506','$_2415','$_2420','$_2425','$_2430','$_2400','$_2405','$_2410','$_3400','$_3405','$_2400','$_3405','$_3415','$_3440','$_3405$','_3410','$_3420','$_3435','$_3490','$_3425','$_3430','$_3500','$_3520','$_3510','$_1101','$_1301','$_1102','$1105','$L1_Core','$L1_Electives','$ADV_Core','$ADV_Electives','$FOUN','$Total_Credits','$Additional_Courses','$Completed')";
@@ -124,5 +125,11 @@ function cleanInput($input) {
     $output = preg_replace($search, '', $input);
     return $output;
   }
+function IDsanitize($str){
+	if(strlen($str)!=9){
+		echo "<script type='text/javascript'>alert('The ID number you entered is to short.');</script>";
 
+	}
+	return $str;
+}
 ?>
