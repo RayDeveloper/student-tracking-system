@@ -25,7 +25,6 @@ $UpdateQuery="UPDATE courses SET Course_Name= '$coursename_sanitize',
 
 $db->doQuery($UpdateQuery);
 
-
 }
 
 function sanitize($input) {
@@ -67,7 +66,8 @@ function cleanInput($input) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <script src="js/main.js"></script>
+
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
@@ -110,9 +110,9 @@ function cleanInput($input) {
   <H1 align="center">Edit Course</H1>
   <H3>the option to edit a course in the system</H3>
 
-  <form id="formy" action="editCourse.php" method="post"/>
+  <form  action="editCourse.php" align="center"  method="post"/>
     <input type="text" name="search" required placeholder="Course Code"/>
-    <input type="submit" name="submit" value= "Search" />
+    <input type="submit" name="submit"  value= "Search" />
   </form>
 
   </body>
@@ -127,11 +127,13 @@ function cleanInput($input) {
   //$searchq=preg_replace(("#[^0-9a-z]#i" ,"", $searchq);
   $query="SELECT * FROM courses WHERE Course_Code like '$searchq' ";
   $results=$db->doQuery($query);
-  $count=count($results);
+  // $count=count($results);
   //print_r($results);
   //$count =mysql_num_rows($query);
-  if($count==0){
-   $output='There was no search results';
+  if($results->num_rows==0){
+  //  $output='There was no search results';
+  echo "<script type='text/javascript'>alert('The course code does not exist.');</script>";
+
    }else{
   echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bordered>
     <tr>
@@ -142,7 +144,7 @@ function cleanInput($input) {
 
     </tr>";
 while($row=$results->fetch_array()){
-  echo "<form action=editCourse.php method=post>";
+  echo "<form id='editCourse' action='editCourse.php' method='post'>";
   echo "<tr>";
   echo "<td> <input type='text' name='course_name' value='$row[Course_Name]'  </td>";
   echo "<td> <input type='text' name='course_code' value='$row[Course_Code]'  </td>";
@@ -151,7 +153,7 @@ while($row=$results->fetch_array()){
 
   echo "</tr>";
   echo "<td> <input type=hidden name=hidden value='$row[Course_Code]'  </td>";
-  echo "<td>" . "<input type=submit name='update' value=update"  .  " </td>";
+  echo "<td> <input type='submit' onclick='editCourse_confirm();' name='update' value='update'   </td>";
 
   echo "</form>";
 }

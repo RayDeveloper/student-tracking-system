@@ -25,13 +25,56 @@ function validateForm(){
 }
 
 function checked(){
+  $('#check').click(function(e){
   var value = document.getElementById("check").value;
   if(value !="PASS" || value != "NO"){
-  alert("Enter on PASS or NO. :"+value);
+  alert("Enter only PASS or NO. :"+value);
 }
 
+});
 }
 
+function deleteStudent_confirm(){
+  $('#deleteStudent').submit(function(e){
+      var value= confirm("Are you sure you want to delete the student?");
+      if(value== false){
+        e.preventDefault();
+
+      }
+  });
+}
+
+function editStudent_confirm(){
+  $('#editStudent').submit(function(e){//id must be unique
+      var value= confirm("Are you sure you want to submit these changes to the student record?");
+      if(value== false){
+        e.preventDefault();
+
+      }
+  });
+}
+
+function editCourse_confirm(){
+  $('#editCourse').submit(function(e){//id must be unique
+      var value= confirm("Are you sure you want to submit these changes to the course record?");
+      if(value== false){
+        e.preventDefault();
+
+      }
+  });
+}
+
+function deleteCourse_confirm(){
+  $('#deleteCourse').submit(function(e){//id must be unique
+      var value= confirm("Are you sure you want to delete this course?");
+      if(value== false){
+        e.preventDefault();
+      }
+      if(value== true){
+        location.reload();
+      }
+  });
+}
 function startReportPageSetup(){
     console.log("startReportPageSetup");
 

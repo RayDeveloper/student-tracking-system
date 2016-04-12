@@ -29,7 +29,8 @@ $output='';
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <script src="js/main.js"></script>
+
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
@@ -80,22 +81,22 @@ $output='';
 
 </body>
 <?php
-
+$count=0;
 if(isset($_POST['search'])){
 $searchq=sanitize($_POST['search']);
 if(strlen($searchq)<9){
-  echo "<script type='text/javascript'>alert('The ID number you entered is to0 short.');</script>";
+  echo "<script type='text/javascript'>alert('The ID number you entered is too short.');</script>";
 }else if (strlen($searchq)>9){
   echo "<script type='text/javascript'>alert('The ID number you entered is too long.');</script>";
 }else{
 //$searchq=preg_replace(("#[^0-9a-z]#i" ,"", $searchq);
 $query="SELECT * FROM uwi WHERE StudentID like '".$searchq."' ";
 $results=$db->doQuery($query);
-$count=count($results);
+// $count=count($results);
+//print_r($results);
+if($results->num_rows==0){
+  echo "<script type='text/javascript'>alert('Student ID number does not exist in the system.');</script>";
 
-
-if($count==0){
- $output='There was no search results';
  }else{
 echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bordered>
   <tr>

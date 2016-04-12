@@ -1,3 +1,14 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	 <meta charset='utf-8'>
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	 <script src="js/main.js"></script>
+
+</head>
+</html>
 <?php
 
 require_once("lib/database.php");
@@ -12,9 +23,18 @@ $employee=FALSE;
 $db = new DatabaseAdapter("students");
 $sql="SELECT * FROM uwi ";
 $results=$db->doQuery($sql);
+$ID=$_POST['ID'];
+$sql2="SELECT * FROM uwi where StudentID= '$ID' ";
+$cursor=$db->doQuery($sql2);
+if($cursor->num_rows!=0){
+	echo "<script type='text/javascript'>alert('Student ID number already exists in the system.'); </script>";
+	//header('Location:addStudent.php');
+	//exit();
+	//echo "<script type='text/javascript'>location.reload();</script>";
+header("Refresh:0; url=addStudent.php");
+}else{
 //$con=mysql_connect("localhost","root","usbw") or die("Could not connect");
 //mysql_select_db("students") or die("Could not find db!");
-
 $fname=sanitize($_POST['fname']);
 $lname=sanitize($_POST['lname']);
 $ID=IDsanitize($_POST['ID']);
@@ -83,6 +103,11 @@ $_1400=$_POST['1400'];
 
 $sql="INSERT INTO uwi (FirstName,LastName,StudentID,S1500,S1506,S1501,S1502,S1503,S1507,S1504,S1505,S2415,S2420,S2425,S2430,S2400,S2405,S2410,S3400,S3405,S2500,S3415,S3440,S3410,S3420,S3435,S3490,S3425,S3430,S3500,S3520,S3510,S1101,S1301,S1102,S1105,L1_Core,L1_Electives,ADV_Core,ADV_Electives,FOUN,Total_Credits,Additional_Courses,Completed) VALUES ('$fname','$lname','$ID','$_1500','$_1506','$_1501','$_1502','$_1503','$_1507','$_1504','$_1505','$_2415','$_2420','$_2425','$_2430','$_2400','$_2405','$_2410','$_3400','$_3405','$_2500','$_3415','$_3440','$_3410','$_3420','$_3435','$_3490','$_3425','$_3430','$_3500','$_3520','$_3510','$_1101','$_1301','$_1102','$_1105','$L1_Core','$L1_Electives','$ADV_Core','$ADV_Electives','$FOUN','$Total_Credits','$Additional_Courses','$Completed')";
 $results=$db->doQuery($sql);
+echo "<script type='text/javascript'>alert('Student added successfully.');</script>";
+//header('Location:addStudent.php');
+header("Refresh:0; url=addStudent.php");
+
+
 
 //echo $results;
 //$sql="INSERT INTO uwi (FirstName,LastName,StudentID,S1400,S1500,S1506,S1405,S1501,S1502,S1415,S1503,S1507,S1420,S1502_,S1504,S1410,S1505,S1507_,S1425,S1505_,S1506_,S2415,S2420,S2425,S2430,S2400,S2405,S2410,S3400,S3405,S2500,S3415,S3440,S3410,S3420,S3435,S3490,S3425,S3430,S3500,S3520,S3510,S1101,S1301,S1102,S1105,L1_Core,L1_Electives,ADV_Core_48,ADV_Electives,FOUN_9,Total Credits,Additional Courses,Completed)
@@ -90,10 +115,12 @@ $results=$db->doQuery($sql);
 //echo "finiish inserting";
 
 
-if($results){
-	header('Location:addStudent.php');
-}else{
-	echo "not inserted";
+// if($results){
+// 	header('Location:addStudent.php');
+// }else{
+// 	echo "not inserted";
+// }
+
 }
 //mysql_close($con);
 

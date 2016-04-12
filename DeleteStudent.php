@@ -24,8 +24,18 @@ if(strlen($search_sanitize)< 9){
 }else if(strlen($search_sanitize)>9){
   echo "<script type='text/javascript'>alert('The ID number you entered is too long');</script>";
 }else{
-  $Deletequery =("DELETE FROM uwi WHERE  StudentID='$search_sanitize' ");
-  $db->doQuery($Deletequery);
+  $Selectquery =("SELECT * FROM uwi WHERE  StudentID='$search_sanitize' ");
+  $res=$db->doQuery($Selectquery);
+  if($res->num_rows==0){
+    echo "<script type='text/javascript'>alert('The student does not exist');</script>";
+
+  }else{
+    $Deletequery =("DELETE FROM uwi WHERE  StudentID='$search_sanitize' ");
+    $db->doQuery($Deletequery);
+  }
+
+
+
 }
  // mysql_query($Deletequery,$con);
 };
@@ -76,7 +86,8 @@ function cleanInput($input) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <script src="js/main.js"></script>
+
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
@@ -120,9 +131,9 @@ function cleanInput($input) {
 <H1 align="center">Delete  a student</H1>
 <H3>Delete a student from the system</H3>
 
-<form id="formy" action="DeleteStudent.php" method="post"/>
+<form id="deleteStudent" action="DeleteStudent.php"  method="post"/>
   <input type="text" name="search" required placeholder="Student ID Number"/>
-  <input type="submit" name="submit" value= "Delete" />
+  <input type="submit" onclick="deleteStudent_confirm();" name="submit" value= "Delete" />
 </form>
 
 <H1 align="center">Student listing</H1>

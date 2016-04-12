@@ -14,8 +14,18 @@ $records=$db->doQuery($sql);
 
 if(isset($_POST['coursecode'])){
   $courseCode_sanitize=sanitize($_POST['coursecode']);
-  $Deletequery =("DELETE FROM Courses WHERE  Course_Code='$courseCode_sanitize' ");
-  $db->doQuery($Deletequery);
+  $Selectquery =("SELECT * FROM Courses WHERE  Course_Code='$courseCode_sanitize' ");
+  $res=$db->doQuery($Selectquery);
+  if($res->num_rows==0){
+    echo "<script type='text/javascript'>alert('The course does not exist.');</script>";
+
+  }else{
+    $Deletequery =("DELETE FROM Courses WHERE  Course_Code='$courseCode_sanitize' ");
+    $db->doQuery($Deletequery);
+    header("Refresh:0");
+  }
+
+
   $new_code= str_replace("INFO","S",$_POST['coursecode']);
 
   // $sql3= "ALTER TABLE uwi DROP COLUMN $new_code";
@@ -62,7 +72,8 @@ function cleanInput($input) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <script src="js/main.js"></script>
+
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
@@ -103,9 +114,9 @@ function cleanInput($input) {
   </div>
   </div>
 <H1 align="center">Delete A Course</H1>
-<H3>Delete a course from the system</H3>
+<H3>Delete a course from the system.</H3>
 
-<form action="DeleteCourse.php" align="center" method="post">
+<form id="deleteCourse" action="DeleteCourse.php" align="center" method="post">
   <!-- Course Name: <input type="text" name="coursename"><br> -->
   Course Code: <input type="text" required name="coursecode"><br>
      <!-- <label >Choose Course Level</label></br>
@@ -115,7 +126,7 @@ function cleanInput($input) {
   <input type="radio" name="level" value="Elective" >Elective<br>
   <input type="radio" name="level" value="Foundation Course" >Foundation Course<br> -->
 
-  <input type="submit" name="submit" value="Delete Course">
+  <input type="submit" name="submit" onclick="deleteCourse_confirm();" value="Delete Course">
 </form>
 <H1 align="center">All Courses</H1>
 <table width="200" border="1" cellpadding="1" cellspacing="1" class="table table-bordered">
@@ -142,11 +153,6 @@ echo "</tr>";
 ?>
 </table>
 <!-- </body> -->
-<?php
 
- //$_CourseName = isset($_POST['coursename']) ? $_POST['coursename'] : '';
- //$_CourseCode = isset($_POST['coursecode']) ? $_POST['coursecode'] : '';
-
-?>
 
 </html>

@@ -116,10 +116,15 @@ $_CourseCredits="3";
 if($_CourseLevel=="Elective")
 $_CourseCredits="4";
 
-
-
+$sql2="SELECT Course_Level from Courses where Course_Level= '$_CourseCode_sanitzied' ";
+$res=$db->doQuery($sql2);
+if($res->num_rows==0){
+  echo "<script type='text/javascript'>alert('Course code already in the system.'); </script>";
+  header("Refresh:0; url=addCourse.php");
+}else{
   $sql="INSERT INTO Courses (Course_Name,Course_Code,Course_Level,Course_Credits) Values ('$_CourseName_sanitzied','$_CourseCode_sanitzied','$_CourseLevel','$_CourseCredits')";
   $db->doQuery($sql);
+  echo "<script type='text/javascript'>alert('Course added successfully.');</script>";
   $new_code= str_replace("INFO ","S",$_CourseCode);
   $place_code= str_replace("S","",$new_code);
   //echo "new code: $new_code<br>";
@@ -137,6 +142,7 @@ $_CourseCredits="4";
   //   $sql2="ALTER TABLE uwi ADD $new_code VARCHAR( 255 ) after S1105";
   //   $db->doQuery($sql2);
   // }
+}
 
 }
 function sanitize($input) {

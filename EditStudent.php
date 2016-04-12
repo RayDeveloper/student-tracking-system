@@ -31,6 +31,7 @@ StudentID='$_POST[SID]' , S1500='$_POST[S1500]' ,S1506='$_POST[S1506]', S1501='$
  ADV_Electives='$_POST[ADV_Electives]' , FOUN='$_POST[FOUN]' , Total_Credits='$_POST[Total_Credits]' ,
  Additional_Courses='$_POST[Additional_Courses]' , Completed='$_POST[Completed]'  WHERE StudentID='$_POST[hidden]' ";
 $db->doQuery($UpdateQuery);
+
 }
 
 
@@ -49,7 +50,7 @@ $db->doQuery($UpdateQuery);
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <!-- <script src="script.js"></script> -->
+   <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/admin.css" media="screen" type="text/css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
@@ -104,11 +105,11 @@ $db->doQuery($UpdateQuery);
 </div>
 </div>
 <H1 align="center">Edit student</H1>
-<H3>the option to edit a student by entering there ID number</H3>
+<H3>the option to edit a student by entering their ID number.</H3>
 
-<form id="formy" action="editStudent.php" method="post"/>
+<form  action="editStudent.php" align="center" method="post"/>
   <input type="text" name="search" required placeholder="Student ID Number"/>
-  <input type="submit" name="submit" value= "Search" />
+  <input type="submit" name="submit"  value= "Search" />
 </form>
 
 </body>
@@ -127,12 +128,14 @@ echo "<script type='text/javascript'>alert('The ID number you entered is too sho
 //$searchq=preg_replace(("#[^0-9a-z]#i" ,"", $searchq);
 $query="SELECT * FROM uwi WHERE StudentID like '".$searchq."' ";
 $results=$db->doQuery($query);
-$count=count($results);
+//$count=count($results);
 //print_r($results);
 //$count =mysql_num_rows($query);
 
-if($count==0){
- $output='There was no search results';
+if($results->num_rows==0){
+ // $output='There was no search results';
+ echo "<script type='text/javascript'>alert('The student does not exist.');</script>";
+
  }else{
 echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bordered>
   <tr>
@@ -184,7 +187,7 @@ echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bo
   </tr>";
 
 while($row=$results->fetch_array()){
-echo "<form action=EditStudent.php method=post>";
+echo "<form id='editStudent' action='EditStudent.php' method='post'>";
  echo "<tr>";
  echo "<td> <input type='text' name='fname' value='$row[FirstName]'/>  </td>";
  echo "<td> <input type='text' name='lname' value='$row[LastName]' /></td>";
@@ -245,7 +248,7 @@ echo "<form action=EditStudent.php method=post>";
  echo "<td> <input type='text' name='Completed' value='$row[Completed]'/> </td>";
  echo "</tr>";
  echo "<td>" . "<input type=hidden name=hidden value=" . $row['StudentID'] . " </td>";
- echo "<td>" . "<input type=submit name=update value=update"  .  " </td>";
+ echo "<td> <input type='submit' onclick='editStudent_confirm();' name='update' value='update' </td>";
  echo "</form>";
   }//end while
   echo "</table>";

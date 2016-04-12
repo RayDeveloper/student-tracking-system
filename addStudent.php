@@ -63,7 +63,7 @@
   First name: <input type="text" required name="fname"/><br>
   Last name: <input type="text" required name="lname"/><br>
   Student ID: <input type="text" id="ID" required name="ID"/><br>
-  1500:<input type="text" id="check" onchange="checked();" name="1500"/><br>
+  1500:<input type="text" id="check" onclick="checked();" name="1500"/><br>
   1506:<input type="text"  name="1506"/><br>
   1501:<input type="text" name="1501"/><br>
   1502:<input type="text" name="1502"/><br>
