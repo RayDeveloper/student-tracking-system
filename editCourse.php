@@ -60,7 +60,7 @@ function cleanInput($input) {
 <html>
 
 <head>
-  <title>Edit Student</title>
+  <title>Edit Course</title>
   <meta charset="UTF-8">
    <meta charset='utf-8'>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -135,25 +135,35 @@ function cleanInput($input) {
   echo "<script type='text/javascript'>alert('The course code does not exist.');</script>";
 
    }else{
-  echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bordered>
-    <tr>
-    <th>Course Name</th>
-    <th>Course Code</th>
-    <th>Course Level</th>
-    <th>Course Credits</th>
-
-    </tr>";
+  // echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bordered>
+  //   <tr>
+  //   <th>Course Name</th>
+  //   <th>Course Code</th>
+  //   <th>Course Level</th>
+  //   <th>Course Credits</th>
+  //
+  //   </tr>";
 while($row=$results->fetch_array()){
-  echo "<form id='editCourse' action='editCourse.php' method='post'>";
+  echo "<br>";
+  echo "<br>";
+  echo "<br>";
+  echo "<table align='center'>";
+  echo "<form id='editCourse'  action='editCourse.php' method='post'>";
   echo "<tr>";
-  echo "<td> <input type='text' name='course_name' value='$row[Course_Name]'  </td>";
-  echo "<td> <input type='text' name='course_code' value='$row[Course_Code]'  </td>";
-  echo "<td> <input type='text' name='course_level' value='$row[Course_Level]'  </td>";
-  echo "<td> <input type='text' name='course_credits' value='$row[Course_Credits]'  </td>";
-
+  echo "<td> Course Name: <input type='text' name='course_name' value='$row[Course_Name]'  </td>";
+  echo "</tr>";
+  echo "<tr>";
+  echo "<td> Course Code: <input type='text' name='course_code' value='$row[Course_Code]'  </td>";
+  echo "</tr>";
+  echo "<tr>";
+  echo "<td> Course Level: <input type='text' name='course_level' value='$row[Course_Level]'  </td>";
+  echo "</tr>";
+  echo "<tr>";
+  echo "<td> Course Credits: <input type='text' name='course_credits' value='$row[Course_Credits]'  </td>";
   echo "</tr>";
   echo "<td> <input type=hidden name=hidden value='$row[Course_Code]'  </td>";
-  echo "<td> <input type='submit' onclick='editCourse_confirm();' name='update' value='update'   </td>";
+  echo "<br>";
+  echo " <input  type='submit' onclick='editCourse_confirm();' name='update' value='update' ";
 
   echo "</form>";
 }

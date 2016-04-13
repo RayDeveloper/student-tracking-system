@@ -135,123 +135,297 @@ $results=$db->doQuery($query);
 if($results->num_rows==0){
  // $output='There was no search results';
  echo "<script type='text/javascript'>alert('The student does not exist.');</script>";
-
  }else{
-echo "<table width=200 border=1 cellpadding=1 cellspacing=1 class=table table-bordered>
-  <tr>
-  <tr>
-  <th>First Name</th>
-  <th>Last Name</th>
-  <th>Student ID</th>
-  <th>1500</th>
-<th>1506</th>
-<th>1501</th>
-<th>1502</th>
-<th>1503</th>
-<th>1507</th>
-<th>1504</th>
-<th>1505</th>
-<th>2415</th>
-<th>2420</th>
-<th>2425</th>
-<th>2430</th>
-<th>2400</th>
-<th>2405</th>
-<th>2410</th>
-<th>3400</th>
-<th>3405</th>
-<th>2500</th>
-<th>3415</th>
-<th>3440</th>
-<th>3410</th>
-<th>3420</th>
-<th>3435</th>
-<th>3490</th>
-<th>3425</th>
-<th>3430</th>
-<th>3500</th>
-<th>3520</th>
-<th>3510</th>
-<th>1101</th>
-<th>1301</th>
-<th>1102</th>
-<th>1105</th>
-<th>L1 Core/24</th>
-<th>L1 Electives</th>
-<th>ADV Core/48</th>
-<th>ADV Electvies</th>
-<th>FOUNDATION /9</th>
-<th>Total Credits</th>
-<th>Additional Courses</th>
-<th>Completed</th>
-  </tr>";
+// echo "<table cellspacing=10 align=center >";
+//
+// echo  "<tr>";
+// echo  "<th>First Name</th>";
+// echo  "</tr>";
+// echo  "<tr>";
+// echo  "<th>Last Name</th>";
+// echo  "<tr>";
+// echo  "<th>Student ID</th>";
+// echo  "</tr>";
+// echo  "<tr>";
+// echo  "<th>1500</th>";
+// echo  "</tr>";
+// echo  "<tr>";
+// echo"<th>1506</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1501</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1502</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1503</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1507</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1504</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1505</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2415</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2420</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2425</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2430</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2400</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2405</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2410</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3400</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3405</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>2500</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3415</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3440</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3410</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3420</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3435</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3490</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3425</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3430</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3500</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3520</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>3510</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1101</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1301</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>1102</th>";
+// echo"</tr>";
+// echo"<th>1105</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>L1 Core/24</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>L1 Electives</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>ADV Core/48</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>ADV Electvies</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>FOUNDATION /9</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>Total Credits</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>Additional Courses</th>";
+// echo"</tr>";
+// echo"<tr>";
+// echo"<th>Completed</th>";
+// echo"</tr>";
+// echo  "</tr>";
+// echo  "</table>";
+
 
 while($row=$results->fetch_array()){
-echo "<form id='editStudent' action='EditStudent.php' method='post'>";
- echo "<tr>";
- echo "<td> <input type='text' name='fname' value='$row[FirstName]'/>  </td>";
- echo "<td> <input type='text' name='lname' value='$row[LastName]' /></td>";
- echo "<td> <input type='text' name='SID' value='$row[StudentID]'/>  </td>";
- // echo "<td>" . "<input type=text name=S1400 value=" . $row['S1400'] . " </td>";
- //echo "<td>" . "<input type=text name=S1500 value=" . $row['S1500'] .  "</td> ";
- echo "<td>  <input type='text' name='S1500' value= '$row[S1500]' />   </td> ";
- echo "<td>  <input type='text' name='S1506' value='$row[S1506]' /> </td> ";
- // echo "<td>" . "<input type=text name=S1405 value=" . $row['S1405'] . " </td>";
- echo "<td> <input type='text' name='S1501' value=' $row[S1501] ' /> </td> ";
- echo "<td> <input type='text' name='S1502' value=' $row[S1502] ' /> </td> ";
- // echo "<td>" . "<input type=text name=S1415 value=" . $row['S1415'] . " </td>";
- echo "<td>  <input type='text' name='S1503' value='$row[S1503]' /> </td> ";
 
- echo "<td> <input type='text' name='S1507' value=' $row[S1507] ' /> </td>";
+echo "<table class=two align=center >";
+echo "<form id='editStudent' action='EditStudent.php' method='post'>";
+echo "<tr>";
+ echo "<td> First Name <input type='text' name='fname' value='$row[FirstName]'/>  </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Last Name <input type='text' name='lname' value='$row[LastName]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Student ID number <input type='text' name='SID' value='$row[StudentID]'/>  </td>";
+ // echo "<td>" . "<input type=text name=S1400 value=" . $row['S1400'] . " </td>";
+ echo "</tr>";
+ //echo "<td>" . "<input type=text name=S1500 value=" . $row['S1500'] .  "</td> ";
+ echo "<tr>";
+ echo "<td> INFO 1500  <input type='text' name='S1500' value= '$row[S1500]' />   </td> ";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 1506  <input type='text' name='S1506' value='$row[S1506]' /> </td> ";
+ echo "</tr>";
+ // echo "<td>" . "<input type=text name=S1405 value=" . $row['S1405'] . " </td>";
+ echo "<tr>";
+ echo "<td> INFO 1501 <input type='text' name='S1501' value=' $row[S1501] ' /> </td> ";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 1502 <input type='text' name='S1502' value=' $row[S1502] ' /> </td> ";
+ echo "</tr>";
+ // echo "<td>" . "<input type=text name=S1415 value=" . $row['S1415'] . " </td>";
+ echo "<tr>";
+ echo "<td> INFO 1503 <input type='text' name='S1503' value='$row[S1503]' /> </td> ";
+echo "</tr>";
+echo "<tr>";
+ echo "<td> INFO 2507 <input type='text' name='S1507' value=' $row[S1507] ' /> </td>";
+ echo "</tr>";
  // echo "<td>" . "<input type=text name=S1420 value=" . $row['S1420'] . " </td>";
  // echo "<td>" . "<input type=text name=S1502_ value=" . $row['S1502_'] . " </td>";
- echo "<td>  <input type='text' name='S1504' value='$row[S1504]' /> </td> ";
-
+ echo "<tr>";
+ echo "<td> INFO 1504  <input type='text' name='S1504' value='$row[S1504]' /> </td> ";
+echo "</tr>";
  // echo "<td>" . "<input type=text name=S1410 value=" . $row['S1410'] . " </td>";
- echo "<td> <input type='text' name='S1505' value='$row[S1505]' /> </td>";
+ echo "<tr>";
+ echo "<td> INFO 1505 <input type='text' name='S1505' value='$row[S1505]' /> </td>";
+ echo "</tr>";
  // echo "<td>" . "<input type=text name=S1507_ value=". $row['S1507_'] . " </td>";
  // echo "<td>" . "<input type=text name=S1425 value=" . $row['S1425'] . " </td>";
  // echo "<td>" . "<input type=text name=S1505_ value=" . $row['S1505_'] . " </td>";
  // echo "<td>" . "<input type=text name=S1506_ value=" . $row['S1506_'] . " </td>";
- echo "<td> <input type='text' name='S2415' value='$row[S2415]' /> </td>";
- echo "<td> <input type='text' name='S2420' value='$row[S2420]' /></td>";
- echo "<td> <input type='text' name='S2425' value= '$row[S2425]'/> </td>";
- echo "<td> <input type='text' name='S2430' value='$row[S2430]' /></td>";
- echo "<td> <input type='text' name='S2400' value='$row[S2400]'/> </td>";
- echo "<td> <input type='text' name='S2405' value=' $row[S2405]'/> </td>";
- echo "<td> <input type='text' name='S2410' value='$row[S2410]' /></td>";
- echo "<td> <input type='text' name='S3400' value='$row[S3400]' /></td>";
- echo "<td> <input type='text' name='S3405' value='$row[S3405]'/> </td>";
- echo "<td> <input type='text' name='S2500' value= '$row[S2500]'/> </td>";
- echo "<td> <input type='text' name='S3415' value='$row[S3415]'/> </td>";
- echo "<td> <input type='text' name='S3440' value='$row[S3440]'/> </td>";
- echo "<td> <input type='text' name='S3410' value='$row[S3410]'/> </td>";
- echo "<td> <input type='text' name='S3420' value='$row[S3420]' /></td>";
- echo "<td> <input type='text' name='S3435' value=' $row[S3435]'/> </td>";
- echo "<td> <input type='text' name='S3490' value='$row[S3490]'/> </td>";
- echo "<td> <input type='text' name='S3425' value='$row[S3425]'/> </td>";
- echo "<td> <input type='text' name='S3430' value='$row[S3430]' /></td>";
- echo "<td> <input type='text' name='S3500' value=' $row[S3500]'/> </td>";
- echo "<td> <input type='text' name='S3520' value=' $row[S3520]'/> </td>";
- echo "<td> <input type='text' name='S3510' value='$row[S3510]'/> </td>";
- echo "<td> <input type='text' name='S1101' value=' $row[S1101]'/> </td>";
- echo "<td> <input type='text' name='S1301' value='$row[S1301]'/> </td>";
- echo "<td> <input type='text' name='S1102' value='$row[S1102]'/> </td>";
- echo "<td> <input type='text' name='S1105' value='$row[S1105]'/> </td>";
- echo "<td> <input type='text' name='L1_Core' value='$row[L1_Core]'/> </td>";
- echo "<td> <input type='text' name='L1_Electives' value='$row[L1_Electives]'/> </td>";
- echo "<td> <input type='text' name='ADV_Core' value= '$row[ADV_Core]'/> </td>";
- echo "<td> <input type='text' name='ADV_Electives' value='$row[ADV_Electives]'/> </td>";
- echo "<td> <input type='text' name='FOUN' value='$row[FOUN]'/> </td>";
- echo "<td> <input type='text' name='Total_Credits' value='$row[Total_Credits]'/> </td>";
- echo "<td> <input type='text' name='Additional_Courses' value='$row[Additional_Courses]'/> </td>";
- echo "<td> <input type='text' name='Completed' value='$row[Completed]'/> </td>";
+ echo "<tr>";
+ echo "<td> INFO 2415 <input type='text' name='S2415' value='$row[S2415]' /> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2420 <input type='text' name='S2420' value='$row[S2420]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2425 <input type='text' name='S2425' value= '$row[S2425]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2430 <input type='text' name='S2430' value='$row[S2430]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2400 <input type='text' name='S2400' value='$row[S2400]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2405 <input type='text' name='S2405' value=' $row[S2405]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2410 <input type='text' name='S2410' value='$row[S2410]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3400 <input type='text' name='S3400' value='$row[S3400]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3405 <input type='text' name='S3405' value='$row[S3405]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 2500 <input type='text' name='S2500' value= '$row[S2500]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3415 <input type='text' name='S3415' value='$row[S3415]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3440 <input type='text' name='S3440' value='$row[S3440]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3410 <input type='text' name='S3410' value='$row[S3410]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3420 <input type='text' name='S3420' value='$row[S3420]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3435 <input type='text' name='S3435' value=' $row[S3435]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3490 <input type='text' name='S3490' value='$row[S3490]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3425 <input type='text' name='S3425' value='$row[S3425]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3430 <input type='text' name='S3430' value='$row[S3430]' /></td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3500 <input type='text' name='S3500' value=' $row[S3500]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3520 <input type='text' name='S3520' value=' $row[S3520]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 3510 <input type='text' name='S3510' value='$row[S3510]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 1101 <input type='text' name='S1101' value=' $row[S1101]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 1301 <input type='text' name='S1301' value='$row[S1301]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 1102 <input type='text' name='S1102' value='$row[S1102]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> INFO 1105 <input type='text' name='S1105' value='$row[S1105]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> L1 Core Courses <input type='text' name='L1_Core' value='$row[L1_Core]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> L1 Electives <input type='text' name='L1_Electives' value='$row[L1_Electives]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Advanced level courses <input type='text' name='ADV_Core' value= '$row[ADV_Core]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Advanced level electives  <input type='text' name='ADV_Electives' value='$row[ADV_Electives]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Foundation <input type='text' name='FOUN' value='$row[FOUN]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Total Credits <input type='text' name='Total_Credits' value='$row[Total_Credits]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Additional courses <input type='text' name='Additional_Courses' value='$row[Additional_Courses]'/> </td>";
+ echo "</tr>";
+ echo "<tr>";
+ echo "<td> Completed <input type='text' name='Completed' value='$row[Completed]'/> </td>";
+ echo "</tr>";
  echo "</tr>";
  echo "<td>" . "<input type=hidden name=hidden value=" . $row['StudentID'] . " </td>";
- echo "<td> <input type='submit' onclick='editStudent_confirm();' name='update' value='update' </td>";
+ echo "<td> <input type='submit' style='position: relative;  bottom:900px; height:100px; width:100px' onclick='editStudent_confirm();' name='update' value='update' </td>";
  echo "</form>";
+ echo "</table>";
+
   }//end while
-  echo "</table>";
 
 
 
