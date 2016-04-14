@@ -305,7 +305,7 @@ echo "<tr>";
  echo "<td> INFO 1503 <input type='text' name='S1503' value='$row[S1503]' /> </td> ";
 echo "</tr>";
 echo "<tr>";
- echo "<td> INFO 2507 <input type='text' name='S1507' value=' $row[S1507] ' /> </td>";
+ echo "<td> INFO 1507 <input type='text' name='S1507' value=' $row[S1507] ' /> </td>";
  echo "</tr>";
  // echo "<td>" . "<input type=text name=S1420 value=" . $row['S1420'] . " </td>";
  // echo "<td>" . "<input type=text name=S1502_ value=" . $row['S1502_'] . " </td>";

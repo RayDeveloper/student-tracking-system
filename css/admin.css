@@ -194,3 +194,10 @@ table.two   {
     right: 160px;
     top: 210px;
 }​
+#twotab{
+    width:45%;
+    float:right;
+    position: absolute;
+    right: 160px;
+    top: 210px;
+}​

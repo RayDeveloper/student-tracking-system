@@ -163,7 +163,7 @@ while($row=$results->fetch_array()){
   echo "</tr>";
   echo "<td> <input type=hidden name=hidden value='$row[Course_Code]'  </td>";
   echo "<br>";
-  echo " <input  type='submit' onclick='editCourse_confirm();' name='update' value='update' ";
+  echo " <input  type='submit' onclick='editCourse_confirm();' name='update' value='update'/> ";
 
   echo "</form>";
 }
