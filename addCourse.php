@@ -118,7 +118,7 @@ $_CourseCredits="4";
 
 $sql2="SELECT Course_Level from Courses where Course_Level= '$_CourseCode_sanitzied' ";
 $res=$db->doQuery($sql2);
-if($res->num_rows==0){
+if($res->num_rows!=0){
   echo "<script type='text/javascript'>alert('Course code already in the system.'); </script>";
   header("Refresh:0; url=addCourse.php");
 }else{

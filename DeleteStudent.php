@@ -131,7 +131,7 @@ function cleanInput($input) {
 <H1 align="center">Delete  a student</H1>
 <H3>Delete a student from the system</H3>
 
-<form id="deleteStudent" action="DeleteStudent.php"  method="post"/>
+<form id="deleteStudent" align="center" action="DeleteStudent.php"  method="post"/>
   <input type="text" name="search" required placeholder="Student ID Number"/>
   <input type="submit" onclick="deleteStudent_confirm();" name="submit" value= "Delete" />
 </form>
