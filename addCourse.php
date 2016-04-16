@@ -152,11 +152,11 @@ function sanitize($input) {
         }
     }
     else {
-        if (get_magic_quotes_gpc()) {
-            $input = stripslashes($input);
-        }
+        // if (get_magic_quotes_gpc()) {
+        //     $input = stripslashes($input);
+        // }
         $input  = cleanInput($input);
-        $output = mysql_real_escape_string($input);
+        $output = mysqli_real_escape_string($input);
     }
     return $output;
 }
